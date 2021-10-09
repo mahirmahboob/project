@@ -79,40 +79,39 @@ app.get('/home/:genre', (req, res) => {
 
 // User takes a quiz
 app.post('/takeaquiz', (req, res) => {
-    const user_genre1 = req.body.user_genre1;
-    const user_genre2 = req.body.user_genre2;
-    const user_genre3 = req.body.user_genre3;
+    const user_genre1 = req.body.genre;
+  
 
-    const age_range = req.body.age_range;
-    const maximum_pages = req.body.maximum_pages;
-    const publication_date = req.body.publication_date;
-    const trigger_warning = req.body.trigger_warning
-    const best_seller = req.body.best_seller;
-    const series = req.body.series;
-
+    const age_range = req.body.age;
+    const maximum_pages = req.body.page;
+    const publication_date = req.body.date;
+    const trigger_warning = req.body.triggers;
+    
     /*
     console.log(user_genre1);
+    console.log(user_genre2);
+    console.log(user_genre3);
     console.log(age_range);
     console.log(maximum_pages);
     console.log(publication_date);
     console.log(trigger_warning);
-    console.log(best_seller);
-    console.log(series);
     */
 
 
 const sqlquery = `SELECT *
     FROM book_information
-    WHERE (genre = ? or genre = ? or genre = ?)
+    WHERE genre = ?
     AND 
-    (age_range = ? AND maximum_pages <= ? AND publication_date >= ? AND trigger_warning = ? AND best_seller = ? AND series = ?) ORDER BY rating LIMIT 5`;
+    (age_range = ? AND maximum_pages <= ? AND publication_date >= ? AND trigger_warning = ?) ORDER BY rating LIMIT 3`;
 
 
-    connection.query(sqlquery, [user_genre1, user_genre2, user_genre3, age_range, maximum_pages,publication_date,trigger_warning,best_seller,series], function (err, result){
+    connection.query(sqlquery, [user_genre1, age_range, maximum_pages,publication_date,trigger_warning], function (err, result){
         if (err){
             res.status(404).send("There is some problem");
         }
         else{
+            
+            //console.log(result[0].author);
             res.status(201).send(result);
         }
     })
@@ -194,6 +193,10 @@ app.post('/rest/register', async(req, res) => {
             //return res.render('register', {
                 //message: "Your password does not match"
             //})
+        }
+
+        else if ((password && passwordconfirm) === ""){
+            return res.status(400).send("passowrd can not be empty");
         }
 
         let hashedpassword = await bcrypt.hash(password, 10);

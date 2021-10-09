@@ -84,8 +84,8 @@ class Homepage extends Component {
         we’ll find you that perfect fit.
         </p>
         <div>
-        <Link className="Link" to="/recQuiz">
-        <i></i> Take a quiz!
+        <Link className="Link5" to="/recQuiz">
+            <i></i> Take a quiz!
         </Link>
         </div>
         </div>
@@ -99,7 +99,7 @@ class Homepage extends Component {
         If you’re not satisfied by the outcome, just surprise yourself again.
         </p>
         <div>
-        <Link className="Link1" to="/recSurpriseMe">
+        <Link className="Link4" to="/recSurpriseMe">
             <i></i> Surprise Me!
         </Link>
         </div>
@@ -144,43 +144,3 @@ class Homepage extends Component {
 }
 
 export default Homepage;
-/*import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-// const url = '/rest/login'
-
-class Homepage extends Component {
-    constructor() {
-        super();
-        this.state = {
-           
-        }
-    }
-    
-    render() {
-     
-     return (  
-        <div style={{padding:20}}>
-         Homepage
-         <br/>
-         <Link to="/recGenre">
-            <i></i> Search by Genre!
-        </Link>
-        <br/>
-        <Link to="/recQuiz">
-            <i></i> Take a quiz!
-        </Link>
-        <br/>
-        <Link to="/recSurpriseMe">
-            <i></i> Surprise Me!
-        </Link>
-        <br/>
-         <Link to="/searchdir">
-            <i></i> Search Me!
-        </Link>
-        </div>
-    );
-    }
-}
-
-export default Homepage; */

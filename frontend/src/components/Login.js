@@ -55,12 +55,16 @@ class Login extends Component {
         }).then(response => {
 
             if (response.status === 401) {
-            alert("Wrong combination");
+            alert("Wrong combination, please try again");
+            //window.location.href =  'http://localhost:3000/login';
             
             }
             else
             {
-            alert("successfully Logged In");
+                alert("successfully Logged In");
+                // this is just a test. we redirect the user to the login page. When he have the dashboard, 
+                // we will redirect the user to the proper webpage
+                window.location.href = 'http://localhost:3000/home';
             }
             })
             .catch(function(error) {

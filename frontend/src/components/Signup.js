@@ -63,6 +63,10 @@ class Signup extends Component {
             {
                 alert("Your Password and passwordConfirm does not match");
             }
+            else if (response.status === 400)
+            {
+                alert("Password and ConfirmPassword can not be empty");
+            }
 
             else if (response.status === 201) {
             alert("Succesfully Signup Up!");
