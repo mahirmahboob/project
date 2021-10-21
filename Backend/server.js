@@ -63,7 +63,7 @@ app.get('/home/:genre', (req, res) => {
 
     const genre_given_by_user = (req.params.genre);
     //console.log(genre_given_by_user);
-    connection.query('SELECT * FROM book_information WHERE genre= ? ORDER BY rating LIMIT 5', genre_given_by_user, function (err, result) {
+    connection.query('SELECT * FROM book_information WHERE genre= ? ORDER BY rating LIMIT 3', genre_given_by_user, function (err, result) {
 
         if (err) {
             res.status(404).send('Not working');
@@ -160,21 +160,28 @@ you have to install bcryptjs------npm i bcrypt
 */
 
 app.post('/rest/register', async(req, res) => {
+
     
     const username = req.body.username;
     const password = req.body.password;
     const passwordconfirm = req.body.passwordConfirm;
+    const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
+    const email = req.body.email;
+    console.log(email);
 
     try {
     // we take the email that user entered and check if that usernmae already exist in our databse
     connection.query('select username from user_table where username = ?', [username], async (err, result) => {
         
         if (err) {
+            console.log("something went wrong here");
             res.send({err:err});
+            
         }
 
         // if result is more that 0 meanning, in our database a email exact email exist that means user can not use the email.
-        if (result.length > 0) {
+        else if (result.length > 0) {
+            console.log("something went wrong here 2");
             return res.status(404).send("That email already exist");
             
             //return res.send(err, {message:"That email already exist"});
@@ -188,7 +195,7 @@ app.post('/rest/register', async(req, res) => {
         else if (password != passwordconfirm){
             
             //console.log('Your password does not match');
-            
+            console.log("something went wrong here 3 ");
             return res.status(406).send("Your password does not match");
             //return res.render('register', {
                 //message: "Your password does not match"
@@ -196,24 +203,66 @@ app.post('/rest/register', async(req, res) => {
         }
 
         else if ((password && passwordconfirm) === ""){
+            console.log("something went wrong here 4");
             return res.status(400).send("passowrd can not be empty");
         }
 
-        let hashedpassword = await bcrypt.hash(password, 10);
-        connection.query('insert into user_table set ?', {username: username, password: hashedpassword},(err, result) => {
-            if (err){
-                res.send({err:err})
+        else if ((username.length <= 6) || (password.length <= 6)){
+            console.log("something went wrong here 5 ");
+            return res.status(416).send("username or password can not be less than six character long");
+
+        }
+
+        else if (Your_Favorite_Dish.length <=3){
+            console.log("something went wrong here 6");
+            return res.status(409).send("Favorite dish has to be atleast four character long");
+        }
+
+        else if ((email === "") || (email.length <= 6))
+        {
+            console.log("something went wrong here 7");
+            return res.status(417).send("Email field can not be empty and it has to be atleast 7 characters long");
+        }
+
+        connection.query('insert into user_bookmark (username) VALUES (?)', username, function(err, res) {
+            if (err)
+            {
+                //console.log("we are not able to add username in the user_bookmark table");
+                res.send({err:err});
+            }
+            else
+            {
+                console.log("we are able to add username in the user_bookmark table");
+            }
+
+        })
+
+        connection.query('insert into user_book_history (username) VALUES (?)', username, function(err, res) {
+            if (err)
+            {
+                //console.log("we are not able to add username in the user_book_history table");
+                res.send({err:err});
             }
 
             else
             {
-                //console.log(result)
+                console.log("we are able to add username in the user_book_history table");
+            }
+            
+        })
+
+        let hashedpassword = await bcrypt.hash(password, 10);
+        connection.query('insert into user_table set ?', {username: username, password: hashedpassword, email: email, Your_Favorite_Dish: Your_Favorite_Dish },(err, result) => {
+            if (err){
+                console.log("we have problem in the backend");
+                res.send({err:err})
+                
+            }
+
+            else
+            {
+
                 return res.status(201).send(result);
-                //res.redirect('/login');
-                //console.log(result)
-                //res.redirect('/signup', {
-                //message: "User Registered"
-            //}) 
             }
         } )
     })
@@ -223,6 +272,95 @@ app.post('/rest/register', async(req, res) => {
  
 });
 
+
+//Forgot Password
+app.post('/forgot', (req, res) =>{
+    const username = req.body.username;
+    const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
+    const New_password = req.body.New_password;
+    const New_passwordConfirm = req.body.New_passwordConfirm;
+
+
+    if (username  === "" || Your_Favorite_Dish === "" || New_password === "" || New_passwordConfirm === "") {
+        res.status(400).send("Can not leave any of the field blank");
+    }
+
+    else if (New_password != New_passwordConfirm)
+    {
+        res.status(406).send("New_Password & New_passwordConfirm needs to match");
+    }
+
+    else if (New_password.length <= 6) 
+    {
+        res.status(416).send("Password and Confirm password has to be atleast Seven characte long");
+    }
+
+    else 
+    {
+        
+        connection.query('SELECT * FROM user_table WHERE username = ? AND Your_Favorite_Dish = ?', [username, Your_Favorite_Dish], async (err, result) => {
+            
+        if (err) {
+            res.send({err:err});
+        }
+
+        else if (result.length === 0)
+        {
+            res.status(404).send("Incorrect usernmae or security answer");
+        }
+
+        else {
+
+        let hashednewpassword = await bcrypt.hash(New_password, 10);
+        connection.query('update user_table Set password = ? where username = ?', [hashednewpassword, username], (err, result) => {
+
+            if (err)
+            {
+                res.send({err:err});
+            }
+
+            else 
+            {
+                res.status(201).send(result);
+            }
+
+        })
+
+        } //inner else 
+
+    })
+        
+    }
+    // this is the else
+})
+
+
+
+
+
+app.post('/forgotusername', (req, res) => {
+    const email = req.body.email;
+    const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
+
+    if (email  === "" || Your_Favorite_Dish === "") {
+        res.status(400).send("Can not leave any of the field blank");
+    }
+
+    else 
+    {
+        connection.query('select username from user_table where email = ? and Your_Favorite_Dish = ?', [email, Your_Favorite_Dish], (err, result) => {
+            if (err)
+            {
+                res.send({err:err});
+            }
+
+            else 
+            {
+                res.status(201).send(result);
+            }
+        })
+    }
+})
 
 
 /*
@@ -329,6 +467,42 @@ app.get('/logout', (req, res) => {
 });
 
 
+/*
+app.get('/userdashboard/:user', function(req, res) {
+
+    //if(req.user) 
+    //{
+        const user = req.params.user;
+        //const table_name = req.body.table_name;
+        console.log(user);
+        //console.log(table_name);
+
+        connection.query('select book_name from user_bookmark where username= ?', user, function (err, result) {
+
+        if (err) {
+            //res.status(404).send('Not working');
+            console.log("not working");
+        }
+
+        else {
+            //console.log(response);
+            //res.status(201).send(result);
+            console.log("we are ready to send data to the frontend");
+        }
+
+        })
+   // }
+
+});
+
+
+*/
+
+
+
+
+
+
 
 /*
 Copied this code from stackoverflow...
@@ -361,13 +535,29 @@ app.listen(5000)
 
 /*
 
-        if(!user){
-            
-            console.log("either username or password is wrong");
-            return res.status(401);
-        }
-        else
-        {
-            return res.send("Wrong combination");
-        }
+ import React, { Component } from 'react'
+
+ class userdashboard extends Component {
+    constructor(props) {
+         super(props);
+         this.state = {
+        } 
+     }
+
+
+    render() {
+    
+
+        const { state } = this.props.location
+        //console.log(state.username);
+     return ( 
+         <div>
+             <h1> Welcome {state.state}</h1>
+        </div> 
+     )
+    }
+}
+
+
+ export default userdashboard;
 */

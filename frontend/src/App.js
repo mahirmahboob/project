@@ -8,9 +8,11 @@ import "./App.css";
 import Homepage from "./components/homepage/homepage";
 import { SearchPage } from "./components/searchPage/searchPage";
 import GenreRecs from "./components/genre/genre";
+import userdashboard from "./components/dashboard/userdashboard";
 import QuizRecs from "./components/quiz/quiz";
 import SurpriseMeRecs from "./components/surpriseMe/surpriseMe";
-
+import forgot from "./components/forgot";
+import forgotusername from "./components/forgotusername";
 class App extends Component {
   constructor() {
     super();
@@ -50,8 +52,11 @@ class App extends Component {
               <Route path="/signup" component={Signup} />
               <Route path="/searchdir" component={SearchPage} />
               <Route path="/recGenre" component={GenreRecs} />
+              <Route path="/userdashboard" component={userdashboard} />
               <Route path="/recQuiz" component={QuizRecs} />
               <Route path="/recSurpriseMe" component={SurpriseMeRecs} />
+              <Route path="/forgot" component={forgot} />
+              <Route path="/forgotusername" component={forgotusername} />
               {/* <Route component={Notfound} /> */}
             </div>
           </div>

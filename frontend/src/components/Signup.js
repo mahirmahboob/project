@@ -7,8 +7,10 @@ class Signup extends Component {
         super();
         this.state = {
             username: "",
+            email: "",
             password: "",
             passwordConfirm: "",
+            Your_Favorite_Dish: "",
             //account: {},
         }
     }
@@ -54,6 +56,8 @@ class Signup extends Component {
                 username: this.state.username,
                 password: this.state.password,
                 passwordConfirm: this.state.passwordConfirm,
+                Your_Favorite_Dish: this.state.Your_Favorite_Dish,
+                email: this.state.email,
     })
         }).then(response => {
             if (response.status === 404) {
@@ -66,6 +70,21 @@ class Signup extends Component {
             else if (response.status === 400)
             {
                 alert("Password and ConfirmPassword can not be empty");
+            }
+
+            else if (response.status ===416)
+            {
+                alert("Username and Password can not be less than seven character long");
+            }
+
+            else if (response.status ===409)
+            {
+                alert("Favorite dish has to be atleast four character long");
+            }
+
+         else if (response.status ===417)
+            {
+                alert("Email field can not be empty and it has to be atleast 7 characters long");
             }
 
             else if (response.status === 201) {
@@ -83,7 +102,9 @@ class Signup extends Component {
     render() {
         const username = this.state.username;
         const password = this.state.password;
-        const passwordConfirm = this.state.passwordConfirm
+        const passwordConfirm = this.state.passwordConfirm;
+        const Your_Favorite_Dish = this.state.Your_Favorite_Dish;
+        const email = this.state.email;
 
      return (  
         <div>
@@ -103,6 +124,13 @@ class Signup extends Component {
                             </td>
                         </tr>
                         <tr>
+                            <td>email:</td>
+                            <td>
+                                <input type="email" name="email" size="20" autoCorrect="off" spellCheck="false"
+                                       autoCapitalize="off" value={email} onChange={this.handleChange}/>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>password:</td>
                             <td>
                                 <input type="password" name="password" size="20" autoCorrect="off" spellCheck="false"
@@ -114,6 +142,13 @@ class Signup extends Component {
                             <td>
                                 <input type="password" name="passwordConfirm" size="20" autoCorrect="off" spellCheck="false"
                                        autoCapitalize="off" value={passwordConfirm} onChange={this.handleChange}/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Your_Favorite_Dish:</td>
+                            <td>
+                                <input type="SequrityQuestion" name="Your_Favorite_Dish" size="20" autoCorrect="off" spellCheck="false"
+                                       autoCapitalize="off" value={Your_Favorite_Dish} onChange={this.handleChange}/>
                             </td>
                         </tr>
                     </tbody>

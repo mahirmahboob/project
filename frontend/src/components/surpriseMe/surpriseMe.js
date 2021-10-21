@@ -1,40 +1,53 @@
-import React, { Component } from "react";
-import { useEffect } from "react";
-import { useState} from "react";
-import {link} from "react-router-dom";
+import React from "react";
 
-
-function SurpriseMeRecs() {
-    useEffect( () => {
-        fetchItems();
-    }, []);
-
-    const [items, setItems] = useState([]);
-
-    const fetchItems = async () => {
-        const data = await fetch('/surpriseme');
-        const items = await data.json();
-        setItems(items);
+export default class SurpriseMeRecs extends React.Component{
+    state = {
+        loading:true,
+        book:null
     };
+    async componentDidMount() {
+        const url = "http://localhost:5000/surpriseme";
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ book: data[0], loading: false});
+        //console.log(data);
 
-    return(
-        <section>
-        {
-            items.map( item => (
-                <div>
-                    <h1 class="book_title">The book Title is: <spanone>{item.book_name}</spanone></h1>
-                    <h4 class="book_genre">The book Genre is: <spantwo>{item.genre}</spantwo></h4>
-                    <h4 class="book_rating">The Overall Rating is: <spanthree>{item.rating}</spanthree></h4>
-                    <h4 class="book_author">The Author of this book is: <spanfour>{item.author}</spanfour></h4>
-                    <h4 class="book_agerange">The book age_range is: <spanfive>{item.age_range}</spanfive></h4>
-                    <h4 class="book_pages">This book contains: <spansix>{item.maximum_pages}</spansix> <extraspan> pages</extraspan></h4>
-                    <h4 class="book_publicationyear">This book was Published in: <spanseven>{item.publication_date}</spanseven></h4>
-                    <h4 class="book_triggerwarning">The book contains some trigger warning like: <spaneight>{item.trigger_warning}</spaneight></h4>
-                </div>
-            ))
-        }
-        </section>
-    );
+    }
+    render(){
+        return(
+            <div>
+                {this.state.loading || !this.state.book ? (
+                <div>loading...</div>
+                ):(
+                    <div> 
+                        <div>Title: {this.state.book.book_name}</div>
+                        <div>Author: {this.state.book.author}</div>
+                        <div>Genre: {this.state.book.genre}</div>
+                        <div>Publication Year: {this.state.book.publication_date}</div>
+                        <div>Rating: {this.state.book.rating}</div>
+                        <div>Maximum Pages: {this.state.book.maximum_pages}</div>
+                        <div>Age Range: {this.state.book.age_range}</div>
+
+                        {this.state.book.series? (
+                            <div>Series: Yes</div>
+                        ):(
+                            <div>Series: No</div>
+                        )}
+                        {this.state.book.best_seller? (
+                            <div>Best Seller: Yes </div>
+                        ):(
+                            <div>Best Seller: No</div>
+                        )}
+                        {this.state.book.trigger_warning? (
+                            <div>Trigger Warnings: {this.state.book.trigger_warning} </div>
+                        ):(
+                            <div>Trigger Warnings: No</div>
+                        )}
+                        
+                    </div>
+                )}
+                
+            </div>  
+        );
+    }
 }
-
-export default SurpriseMeRecs;

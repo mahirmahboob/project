@@ -52,7 +52,7 @@ class QuizRecs extends Component {
 
       return (
         <div className="session">
-        <h1>Quiz</h1>
+        <h1>Take a quiz to find your next read!</h1>
           <div className="register-form">
             <form onSubmit={this.onSubmit}>
               <select value={this.value} name="genre" onChange={this.onChange}> Pick the first genre
@@ -109,7 +109,6 @@ class QuizRecs extends Component {
                 Submit
               </Button>
             </form>
-            <div> The answer should be here</div>
             <div className="quiz-recommendation">
                   {
                       this.state.recommendations.map(rec=>(

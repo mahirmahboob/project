@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 // import { Link } from "react-router-dom";
 
 // const url = '/rest/login'
@@ -9,7 +11,8 @@ class Login extends Component {
         super();
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            user:[],
         }
     }
 
@@ -19,28 +22,6 @@ class Login extends Component {
 
     handleSubmitLogin = (e) => {
         e.preventDefault();
-        /*
-        var formData = new FormData();
-        formData.append('email', this.state.email);
-        formData.append('password', this.state.password);
-
-        const requestOptions = {
-            method: 'POST',
-            body: formData
-        };
-
-        fetch('/rest/login', requestOptions)
-            .then(response => {
-                console.log(response.status);
-                console.log(response.data);
-                this.setState({account: response.data});
-                return response.json();
-            })
-            .catch(function(error) {
-                console.log('Request failed', error)
-            });
-        alert("Successfully Logged In!");
-        */
 
         fetch('/rest/login', {
             method: 'POST',
@@ -56,23 +37,25 @@ class Login extends Component {
 
             if (response.status === 401) {
             alert("Wrong combination, please try again");
-            //window.location.href =  'http://localhost:3000/login';
+            window.location.href =  'http://localhost:3000/login';
             
             }
             else
             {
-                alert("successfully Logged In");
+                
+                //alert("successfully Logged In");
+                console.log("sucessfull");
+                this.props.history.push(`/userdashboard/${this.state.username}`, {state: this.state.username});
                 // this is just a test. we redirect the user to the login page. When he have the dashboard, 
                 // we will redirect the user to the proper webpage
-                window.location.href = 'http://localhost:3000/home';
+                //window.location.href = 'http://localhost:3000/userdashboard';
             }
             })
             .catch(function(error) {
             
                 alert("Something went wrong");
             });
-
-    }
+        }
     //handle submitlogin
 
     render() {
@@ -102,9 +85,11 @@ class Login extends Component {
                     </tbody>
                 </table>
                 <br/>
-                <input type="submit" value="Submit"/>
+                 <input type="submit" value="Submit"/>
             </form>
             <a href="forgot">Forgot your password?</a>
+            <br/>
+            <a href="forgotusername">Forgot your username?</a>
             <br/>
             <div>
                 Don't have an account? 
