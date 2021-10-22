@@ -5,36 +5,45 @@
 
 const http = require('http');
 const express = require('express');
+var session = require("express-session");
 const mysql = require('mysql');
 const { response } = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const session = require('express-session');
-const exphbs = require('express-handlebars');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const flash = require('express-flash');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
-
+var cookieParser = require('cookie-parser');
 
 //Middleware 
 app.use(express.json());
 
-app.use(session({
-    secret: "verygoodsecret",
-    resave: false,
-    saveUninitialized: true
-}));
+
 app.use(express.urlencoded({ extended: false }));
-app.use(require('cookie-parser')()); // i can do this like const cookieParser = require('cookie-parser'); Then, app.use(cookie-parser())
+//app.use(cors({origin: 'http://localhost:3000/userdashboard/', credentials: true}))
 app.use(cors());
 app.use(flash());
-app.use(bodyParser.urlencoded({ extended: true }));
-//passport.js
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+var MemoryStore =session.MemoryStore;
+app.use(session({
+    secret: "topsecret",
+    cookie: {
+        maxAge: 24*60*60*1000
+    },
+    resave: true,
+    saveUninitialized: true,
+    store: new MemoryStore(),
+    cookie: { secure: false } // Remember to set this
+
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 
 //db = database
@@ -411,20 +420,7 @@ passport.use(new LocalStrategy(function(username,password, done){
 }
 ));
 
-/*
-app.post('/rest/login', passport.authenticate('local'), function (req, res) {
 
-    if(req.user.length== 1){
-    console.log(req.user);
-    return res.status(201).send(req.user);
-    }
-
-    else
-    {   
-        console.log("Invalid username or password");
-    }
-});
-*/
 
 
 app.post('/rest/login', (req, res, next) => {
@@ -436,6 +432,7 @@ app.post('/rest/login', (req, res, next) => {
     // req / res held in closure
     req.logIn(user, function(err) {
       if (err) { return next(err); }
+      //req.session.save();
       return res.status(201).send(user);
     });
 
@@ -447,9 +444,11 @@ passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
+
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
+
 // we will use this function later. Not right now
 function isloggedin(req, res, next){
     if(req.isAuthenticated()) return next();
@@ -466,6 +465,41 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+function checkAuthentication(req,res,next){
+    if(req.isAuthenticated()){
+        console.log('user is logged in');
+        //req.isAuthenticated() will return true if user is logged in
+        next();
+    } else{
+        console.log('user is not logged in');
+        res.status(404);
+    }
+}
+
+app.get('/getbook', function(req, res) {
+    //console.log('we are here');
+    connection.query('SELECT book_name FROM book_information order by book_name', function (err, result) {
+
+        if (err) {
+
+            res.status(404).send('Not working');
+        }
+
+        else {
+            console.log('we are returing a results');
+            //console.log(result); 
+            res.status(201).send(result);
+        }
+
+    })
+})
+
+
+
+app.get('/addbook', function(req, res) {
+    console.log('we are in the backend');
+    res.status(201).send('working');
+})
 
 /*
 app.get('/userdashboard/:user', function(req, res) {

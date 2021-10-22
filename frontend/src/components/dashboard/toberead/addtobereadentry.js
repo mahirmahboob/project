@@ -1,26 +1,54 @@
 import React, { Component } from "react";
 import SearchBar from "../searchbar";
-const url = "/rest/submit/post";
 
 class AddEntry extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      title: "",
-      author: "",
-      user: "",
+      //user: "",
+      book_name: "",
     };
   }
 
 
+  handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+  }
+
   submitHandler = (e) => {
     e.preventDefault();
-    console.log("in sumbit handler: ", this.state);
-  };
+          fetch('http://localhost:5000/addbook', {
+            method: 'POST',
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            //user: this.state.user,
+            book_name: this.state.book_name,
+
+            })
+        }).then(response => {
+
+            if (response.status === 401) {
+            alert("user is not logged in");          
+            }
+            else if (response.status === 201)
+            {
+            alert("Successfully added to the book_mark List");
+            }
+            })
+            .catch(function(error) {
+            
+                alert("Something went wrong");
+            });
+        }
 
   render() {
-    const { title, link, user } = this.state;
+    
+    const {book_name} = this.state;
+    console.log(book_name);
     return (
       <div>
         <br />
@@ -35,7 +63,7 @@ class AddEntry extends Component {
         </h1>
         <br />
         <form onSubmit={this.submitHandler}>
-            <SearchBar usr={user} list={"tobelist"}/>
+            <SearchBar />
             <button className="btn btn-primary" type="submit">
               Submit
             </button> 

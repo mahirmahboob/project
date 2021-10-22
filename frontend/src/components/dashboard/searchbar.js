@@ -1,51 +1,46 @@
-import React, { Component, Fragment } from 'react';
-import Select from 'react-select';
 
-const urlAddEntry = "http://localhost:5000/searchup";
+import React, { Component } from 'react'
+import Select from 'react-select'
+import axios from 'axios'
 
-//const urlAlreadyRead = "http://localhost:8080/{usr}/alreadyRead";
+export default class SearchBar extends Component {
 
-/*
-const options = [
-  { value: 'Live Love Laugh', label: 'Live Love Laugh' },
-  { value: 'Hills', label: 'Hills' },
-  { value: 'Percy', label: 'Percy Jackson' },
-];
-*/
-
-class SearchBar extends React.Component {
-    state = {
-        selectedOption: null,
-    };
-
-    handleSelectedinSearch = (selectedOption) => {
-        this.setState({ selectedOption }, () =>
-        console.log(`Option selected:`, this.state.selectedOption)
-        );
-        fetch(urlAddEntry, {
-            method: "GET",
-            body: [this.props.usr, this.props.list, selectedOption],
-          })
-        .then((response) => { response.json(); })
-        .catch((error) => { console.log("Error: ", error); })
-        .then((response) => console.log("Success: ", JSON.stringify(response)))
-    };
-   
-
-    render() {
-        const { selectedOption } = this.state;
-
-        return (
-        <Select
-            value={selectedOption}
-            onChange={this.handleSelectedinSearch}
-            //options={options}
-            //selectedOption={this.state.selectedOption}
-        />
-        );
+  constructor(props){
+    super(props)
+    this.state = {
+      selectOptions : [],
+      book_name: "",
     }
+  }
+
+ async getOptions(){
+   //axios.defaults.withCredentials = true;
+    const res = await axios.get('http://localhost:5000/getbook');
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d.book_name,
+      "label" : d.book_name
+
+    }))
+    this.setState({selectOptions: options})
+
+  }
+
+  componentDidMount(){
+      this.getOptions()
+  }
+
+  render() {
+      console.log(this.state.selectOptions);
+    console.log(this.state.selectOptions)
+    return (
+      <div>
+        <Select options={this.state.selectOptions} />
+      </div>
+    )
+  }
 }
 
-export default SearchBar;
 //https://react-select.com/home
 //https://github.com/JedWatson/react-select
+//, {withCredentials: false}
