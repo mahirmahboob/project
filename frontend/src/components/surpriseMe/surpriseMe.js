@@ -1,4 +1,6 @@
 import React from "react";
+import {Link} from 'react-router-dom';
+//import { Linking } from 'react-native';
 
 export default class SurpriseMeRecs extends React.Component{
     state = {
@@ -27,7 +29,8 @@ export default class SurpriseMeRecs extends React.Component{
                         <div>Rating: {this.state.book.rating}</div>
                         <div>Maximum Pages: {this.state.book.maximum_pages}</div>
                         <div>Age Range: {this.state.book.age_range}</div>
-
+                        <div> Summary: {this.state.book.Synopsis}</div>
+                    
                         {this.state.book.series? (
                             <div>Series: Yes</div>
                         ):(
@@ -43,6 +46,17 @@ export default class SurpriseMeRecs extends React.Component{
                         ):(
                             <div>Trigger Warnings: No</div>
                         )}
+                        {
+                            this.state.book.LinkToAmazon
+                            ?<a href={this.state.book.LinkToAmazon} target="_blank"> Purchase Link</a>
+                            : this.state.book.LinkToAmazon  
+                        }
+
+                        {
+                            this.state.book.PictureLink
+                            ? ( <div><a href={this.state.book.PictureLink} target="_blank"> Image Link</a> </div>
+                            ): (this.state.book.PictureLink 
+                            )}
                         
                     </div>
                 )}

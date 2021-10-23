@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'; 
 const url = "/takeaquiz";
@@ -121,6 +122,9 @@ class QuizRecs extends Component {
                           <h2> Publication Date: {rec.publication_date}</h2>
                           <h2> Best Seller: {rec.best_seller}</h2>
                           <h2>Series: {rec.series}</h2>
+                          <h2><a href={rec.LinkToAmazon} target="_blank"> Purchase Link</a> </h2>
+                          <h2><a href={rec.PictureLink} target="_blank"> Image Link</a> </h2>
+
                           </div>
                         ))
                   }
