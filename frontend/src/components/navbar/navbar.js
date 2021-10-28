@@ -9,6 +9,7 @@ class Navbar extends Component {
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
   };
+  
 
   render() {
     return (
@@ -30,12 +31,25 @@ class Navbar extends Component {
         <Link className="link-item-right" to="/home">
           <Button className="bu">Home</Button>&nbsp;
         </Link>
-        <Link className="link-item-second-right" to="/signup">
-          <Button className="bu">Sign-up</Button>&nbsp;
+
+        <Link className="link-item-right" to="/blog">
+          <Button className="blog">Blog</Button>&nbsp;
         </Link>
-        <Link className="link-item-right" to="/login">
+
+        {this.props.isLoggedIn ? (
+        <Link className="link-item-right" to="/home">
+          <Button onClick={this.props.logout}>LogOut</Button>
+        </Link>
+        ): (
+          <>
+          <Link className="link-item-right" to="/signup">
+          <Button className="bu">Sign-Up</Button>&nbsp;
+        </Link>
+        <Link className="link-item-right" to="/">
           <Button className="bu">Log-in</Button>&nbsp;
         </Link>
+        </>
+        )}
         </div>
       </nav>
     );

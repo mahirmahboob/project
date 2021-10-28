@@ -26,6 +26,19 @@ const books = [
     },
 
     {
+        book_name: "Notebook",
+        genre: "Romance",
+        rating: 4.75,
+        author: "Nicholas Spark",
+        age_range: "18+",
+        maximum_pages: 340,
+        publication_date: "07/03/2021",
+        trigger_warning: "Murder",
+        best_seller: "Yes",
+        series: "No"
+    },
+
+    {
         book_name: "Baking for the Holidays: 50+ Treats for a Festive Season",
         genre: "Cooking",
         rating: 4.2,

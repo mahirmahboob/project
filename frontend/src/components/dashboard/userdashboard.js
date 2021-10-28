@@ -24,7 +24,9 @@ const Dashboard = () => {
         //{title: "Love Lifes", author: "Amy Azelia"},
         //{title: "The Secret Societies", author: "Adrien Potter"},
     ];
+
    
+    //this.props.handleLogin()
     const [gridApi, setGridApi] = useState(null);
     const [gridColumApi, setGridColumnApi] = useState(null);
     const searchDivStyle={backgroundColor:"#dedede",padding:10}
@@ -37,6 +39,7 @@ const Dashboard = () => {
     return (
         <div>
             <div style={{paddingLeft:0, fontSize:40}}> Top Five!</div>
+
                         
             <div className="ag-theme-alpine" style={{paddingLeft: 90, height: 250, width: 400}}>
                 <AgGridReact

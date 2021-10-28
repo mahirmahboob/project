@@ -123,8 +123,7 @@ class QuizRecs extends Component {
                           <h2> Best Seller: {rec.best_seller}</h2>
                           <h2>Series: {rec.series}</h2>
                           <h2><a href={rec.LinkToAmazon} target="_blank"> Purchase Link</a> </h2>
-                          <h2><a href={rec.PictureLink} target="_blank"> Image Link</a> </h2>
-
+                          <img src={rec.PictureLink} height={400} witdth={400} />
                           </div>
                         ))
                   }

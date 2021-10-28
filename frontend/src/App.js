@@ -8,11 +8,13 @@ import "./App.css";
 import Homepage from "./components/homepage/homepage";
 import { SearchPage } from "./components/searchPage/searchPage";
 import GenreRecs from "./components/genre/genre";
-import userdashboard from "./components/dashboard/userdashboard";
 import QuizRecs from "./components/quiz/quiz";
 import SurpriseMeRecs from "./components/surpriseMe/surpriseMe";
+import userdashboard from "./components/dashboard/userdashboard";
 import forgot from "./components/forgot";
 import forgotusername from "./components/forgotusername";
+import blog from "./components/blog/blog";
+
 class App extends Component {
   constructor() {
     super();
@@ -29,16 +31,22 @@ class App extends Component {
     });
   }
 
+  logout=() =>{
+    this.setState({
+      isLoggedIn: false,
+    });
+  }
+
   render() {
     return (
       <Router>
         <Switch>
           <div className="App">
-            <Navbar />
-            <div>
+          <Navbar isLoggedIn={this.state.isLoggedIn} logout={this.logout}/>
+            <div> 
               <Route
                 exact
-                path={"/"}
+                path="/"
                 render={(props) => (
                   <Login
                     {...props}
@@ -47,16 +55,28 @@ class App extends Component {
                   />
                 )}
               />
+              <Route
+                exact
+                path={"/signup"}
+                render={(props) => (
+                  <Signup
+                    {...props}
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleLogin={this.handleLogin}
+                  />
+                )}
+              />
               <Route path="/home" component={Homepage} />
               <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
               <Route path="/searchdir" component={SearchPage} />
               <Route path="/recGenre" component={GenreRecs} />
-              <Route path="/userdashboard" component={userdashboard} />
               <Route path="/recQuiz" component={QuizRecs} />
               <Route path="/recSurpriseMe" component={SurpriseMeRecs} />
+              <Route path="/userdashboard" component={userdashboard} />
               <Route path="/forgot" component={forgot} />
               <Route path="/forgotusername" component={forgotusername} />
+              <Route path="/blog" component={blog} />
+
               {/* <Route component={Notfound} /> */}
             </div>
           </div>

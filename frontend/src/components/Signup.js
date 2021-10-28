@@ -1,7 +1,46 @@
 import React, { Component } from "react";
 
 // const url = '/rest/signup'
+const appStyle = {
+    height: '250px',
+    display: 'flex'
+};
 
+const formStyle = {
+    margin: 'auto',
+    padding: '10px',
+    borderRadius: '5px',
+    background: '#ebd0b9',
+    width: '340px',
+    display: 'block'
+};
+
+const labelStyle = {
+    margin: '10px 0 5px 0',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontSize: '15px',
+};
+
+const inputStyle = {
+    margin: '5px 0 10px 0',
+    padding: '0px', 
+    border: '1px solid #bfbfbf',
+    borderRadius: '0px',
+    boxSizing: 'border-box',
+    width: '100%'
+};
+
+const submitStyle = {
+    margin: '10px 0 0 0',
+    padding: '7px 7px',
+    border: '1px solid #efffff',
+    borderRadius: '3px',
+    background: '#aaa',
+    width: '100%', 
+    fontSize: '15px',
+    color: 'white',
+    display: 'block'
+};
 class Signup extends Component {
     constructor() {
         super();
@@ -9,43 +48,18 @@ class Signup extends Component {
             username: "",
             email: "",
             password: "",
-            passwordConfirm: "",
+            Confirmpassword: "",
             Your_Favorite_Dish: "",
-            //account: {},
+            account: {},
         }
     }
 
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
-
     }
 
     handleSubmitSignup = (e) => {
         e.preventDefault();
-        
-        /*
-        var formData = new FormData();
-        formData.append('username', this.state.username);
-        formData.append('password', this.state.password);
-        formData.append('passwordConfirm', this.state.passwordConfirm);
-
-        const requestOptions = {
-            method: 'POST',
-            body: formData
-        };
-
-        fetch('http://localhost:5000/rest/register', requestOptions)
-            .then(response => {
-                console.log(response.status);
-                console.log(response.data);
-                this.setState({account: response.data});
-                return response.json();
-            })
-            .catch(function(error) {
-                console.log('Request failed', error)
-            });
-        alert("Succesfully Signup Up!");
-        */
 
         fetch('/rest/register', {
             method: 'POST',
@@ -55,7 +69,7 @@ class Signup extends Component {
             body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password,
-                passwordConfirm: this.state.passwordConfirm,
+                Confirmpassword: this.state.Confirmpassword,
                 Your_Favorite_Dish: this.state.Your_Favorite_Dish,
                 email: this.state.email,
     })
@@ -65,11 +79,11 @@ class Signup extends Component {
             }
             else if (response.status ===406)
             {
-                alert("Your Password and passwordConfirm does not match");
+                alert("Your Password and Confirm Password does not match");
             }
             else if (response.status === 400)
             {
-                alert("Password and ConfirmPassword can not be empty");
+                alert("Password and Confirm Password can not be empty");
             }
 
             else if (response.status ===416)
@@ -79,7 +93,7 @@ class Signup extends Component {
 
             else if (response.status ===409)
             {
-                alert("Favorite dish has to be atleast four character long");
+                alert("Favorite Teacher has to be atleast four character long");
             }
 
          else if (response.status ===417)
@@ -89,6 +103,8 @@ class Signup extends Component {
 
             else if (response.status === 201) {
             alert("Succesfully Signup Up!");
+            window.location.href =  'http://localhost:3000/login';
+
             }
             })
             .catch(function(error) {
@@ -96,70 +112,72 @@ class Signup extends Component {
                 console.log('Request failed', error)
             });
     } 
-// End of handlesubmit
-
 
     render() {
         const username = this.state.username;
         const password = this.state.password;
-        const passwordConfirm = this.state.passwordConfirm;
+        const Confirmpassword = this.state.Confirmpassword;
         const Your_Favorite_Dish = this.state.Your_Favorite_Dish;
         const email = this.state.email;
-
      return (  
-        <div>
-            <b>Create an Account</b>
-            <br/>
-            <b>Join our community</b>
-            <br/>
-            <br/>
-            <form onSubmit={this.handleSubmitSignup}>
-                <table border="0">
-                    <tbody>
-                        <tr>
-                            <td>username:</td>
-                            <td>
-                                <input type="username" name="username" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={username} onChange={this.handleChange}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>email:</td>
-                            <td>
-                                <input type="email" name="email" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={email} onChange={this.handleChange}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>password:</td>
-                            <td>
-                                <input type="password" name="password" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={password} onChange={this.handleChange}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>passwordConfirm:</td>
-                            <td>
-                                <input type="password" name="passwordConfirm" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={passwordConfirm} onChange={this.handleChange}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Your_Favorite_Dish:</td>
-                            <td>
-                                <input type="SequrityQuestion" name="Your_Favorite_Dish" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={Your_Favorite_Dish} onChange={this.handleChange}/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br/>
-                <input type="submit" value="Submit"/>
-                <div>
-                Already have an account? 
-                    <a href="/login"> Log in Here!</a>
+        <div style={{padding: 10}}>
+            <div style={appStyle}>
+                <div style={formStyle}>
+                    <b>Create an Account</b>
+                    <br/>
+                    <b>Join our community</b>
+                    <br/>
+                    <br/>
+                    <form onSubmit={this.handleSubmitSignup}>
+                        <table border="0">
+                            <tbody>
+                                
+                                <tr>
+                                    <td>Username:</td>
+                                    <td>
+                                        <input type="username" name="username" size="20" autocorrect="off" spellcheck="false"
+                                            autocapitalize="off" value={this.state.username} onChange={this.handleChange}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>
+                                        <input type="email" name="email" size="20" autocorrect="off" spellcheck="false"
+                                            autocapitalize="off" value={this.state.email} onChange={this.handleChange}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td>
+                                        <input type="password" name="password" size="20"
+                                            required value={this.state.password} onChange={this.handleChange}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Confirm Password:</td>
+                                    <td>
+                                        <input type="password" name="Confirmpassword" size="20"
+                                            required value={this.state.Confirmpassword} onChange={this.handleChange}/>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <td>Who is your Favorite Teacher:</td>
+                                    <td>
+                                        <input type="text" name="Your_Favorite_Dish" size="20"
+                                            required value={this.state.Your_Favorite_Dish} onChange={this.handleChange}/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <input style={submitStyle} type="submit" value="Submit"/>
+                        <div>
+                        Already have an account? 
+                            <a href="/login"> Log in Here!</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
         );
     }
@@ -167,4 +185,27 @@ class Signup extends Component {
 
 export default Signup;
 
+// import React, { Component } from "react";
 
+// // const url = '/rest/login'
+
+// class Signup extends Component {
+//     constructor() {
+//         super();
+//         this.state = {
+           
+//         }
+//     }
+    
+
+//     render() {
+     
+//      return (  
+//         <div>
+//          Signup
+//         </div>
+//     );
+//     }
+// }
+
+// export default Signup;

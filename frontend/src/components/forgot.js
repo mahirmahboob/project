@@ -1,5 +1,45 @@
 import React, { Component } from "react";
 
+const appStyle = {
+    height: '250px',
+    display: 'flex'
+};
+
+const formStyle = {
+    margin: 'auto',
+    padding: '10px',
+    borderRadius: '5px',
+    background: '#ebd0b9',
+    width: '290px',
+    display: 'block'
+};
+
+const labelStyle = {
+    margin: '10px 0 5px 0',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontSize: '15px',
+};
+
+const inputStyle = {
+    margin: '5px 0 10px 0',
+    padding: '0px', 
+    border: '1px solid #bfbfbf',
+    borderRadius: '0px',
+    boxSizing: 'border-box',
+    width: '100%'
+};
+
+const submitStyle = {
+    margin: '10px 0 0 0',
+    padding: '7px 7px',
+    border: '1px solid #efffff',
+    borderRadius: '3px',
+    background: '#aaa',
+    width: '100%', 
+    fontSize: '15px',
+    color: 'white',
+    display: 'block'
+};
 
 class forgot extends Component {
     constructor() {
@@ -17,7 +57,7 @@ class forgot extends Component {
 
     }
 
-    handleSubmitSignup = (e) => {
+    handleForgotPassword = (e) => {
         e.preventDefault();
         
 
@@ -73,52 +113,60 @@ class forgot extends Component {
         const New_passwordConfirm = this.state.New_passwordConfirm;
    
 
-     return (  
-        <div>
+     return ( 
+    <div>
+     <div style={{padding: 10}}>
+        <div style={appStyle}>
+            <div style={formStyle}>
+            <b>Forgot Password</b>
             <br/>
-            <form onSubmit={this.handleSubmitSignup}>
+            <br/>
+            <form onSubmit={this.handleForgotPassword}>
                 <table border="0">
                     <tbody>
                         <tr>
                             <td>username:</td>
-                            <td>
-                                <input type="username" name="username" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={username} onChange={this.handleChange}/>
-                            </td>
+                            <div style={inputStyle}>
+                                <input type="username" name="username" size="20" autocorrect="off" spellcheck="false"
+                                       autocapitalize="off" value={username} onChange={this.handleChange}/>
+                            </div>
                         </tr>
                         <tr>
-                            <td>Your_Favorite_Dish:</td>
-                            <td>
-                                <input type="Your_Favorite_Dish" name="Your_Favorite_Dish" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={Your_Favorite_Dish} onChange={this.handleChange}/>
-                            </td>
+                            <td>New Password:</td>
+                            <div style={inputStyle}>
+                                <input type="password" name="New_password" size="20"
+                                       required value={New_password} onChange={this.handleChange}/>
+                            </div>
                         </tr>
                         <tr>
-                            <td>New_password:</td>
-                            <td>
-                                <input type="password" name="New_password" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={New_password} onChange={this.handleChange}/>
-                            </td>
+                            <td>Confirm New Password:</td>
+                            <div style={inputStyle}>
+                                <input type="password" name="New_passwordConfirm" size="20"
+                                       required value={New_passwordConfirm} onChange={this.handleChange}/>
+                            </div>
                         </tr>
-                       <tr>
-                            <td>New_passwordConfirm:</td>
-                            <td>
-                                <input type="password" name="New_passwordConfirm" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={New_passwordConfirm} onChange={this.handleChange}/>
-                            </td>
+                        <tr>
+                            <td>Who is your favorite Teacher:</td>
+                            <div style={inputStyle}>
+                                <input type="text" name="Your_Favorite_Dish" size="20"
+                                       required value={Your_Favorite_Dish} onChange={this.handleChange}/>
+                            </div>
                         </tr>
                     </tbody>
                 </table>
                 <br/>
-                <input type="submit" value="Submit"/>
+                <input style={submitStyle} type="submit" value="Submit"/>
             </form>
             <br/>
-            <a href="forgotusername">Forgot your username?</a>
+             <a href="forgotusername">Forgot your username?</a>
             <br/>
+            <br/>
+            </div>
+        </div>
+        </div>
         </div>
         );
     }
 }
 
 export default forgot;
-

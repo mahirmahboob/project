@@ -1,14 +1,60 @@
 .right {
-  margin-top: 10%;
+  margin-top: 5%;
   margin-right: 20px;
+  background-color: #c36839;
+  color: black;
+  appearance: none;
+  outline: 0;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 8px;
+  width: 300px;
+  height: 70px;
+  font-size: 18px;
+  transition-duration: 0.4s;
+}
+
+.right:hover {
+  background-color: #f8cbad;
 }
 
 .book-card {
   font-family: "Raleway", sans-serif;
-  font-size: 5px;
-  background-color: #fec821;
-  width: 750px;
-  border: 15px solid #eda31d;
-  padding-right: 50px;
-  margin-left: 350px;
+  font-size: 14px;
+  background-color: #f8cbad;
+  width: 300px;
+  padding: 20px;
+  margin: 10px;
+}
+
+.recs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon {
+  width: 250px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+}
+
+.genre-container {
+  background-color: #fff7e0;
+  padding-top: 100px;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.font {
+  font-family: "Festive", cursive;
+  font-size: 100px;
 }

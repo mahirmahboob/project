@@ -48,15 +48,11 @@ export default class SurpriseMeRecs extends React.Component{
                         )}
                         {
                             this.state.book.LinkToAmazon
-                            ?<a href={this.state.book.LinkToAmazon} target="_blank"> Purchase Link</a>
+                            ?<div><a href={this.state.book.LinkToAmazon} target="_blank"> Purchase Link</a></div>
                             : this.state.book.LinkToAmazon  
                         }
 
-                        {
-                            this.state.book.PictureLink
-                            ? ( <div><a href={this.state.book.PictureLink} target="_blank"> Image Link</a> </div>
-                            ): (this.state.book.PictureLink 
-                            )}
+                        <img src={this.state.book.PictureLink} height={400} witdth={400} />
                         
                     </div>
                 )}

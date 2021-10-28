@@ -80,6 +80,7 @@ app.get('/home/:genre', (req, res) => {
 
         else {
             //console.log(response);
+            //console.log("we are returning a result")
             res.status(201).send(result);
         }
 
@@ -173,7 +174,7 @@ app.post('/rest/register', async(req, res) => {
     
     const username = req.body.username;
     const password = req.body.password;
-    const passwordconfirm = req.body.passwordConfirm;
+    const Confirmpassword = req.body.Confirmpassword;
     const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
     const email = req.body.email;
     console.log(email);
@@ -201,7 +202,7 @@ app.post('/rest/register', async(req, res) => {
             //})
         }
 
-        else if (password != passwordconfirm){
+        else if (password != Confirmpassword){
             
             //console.log('Your password does not match');
             console.log("something went wrong here 3 ");
@@ -211,7 +212,7 @@ app.post('/rest/register', async(req, res) => {
             //})
         }
 
-        else if ((password && passwordconfirm) === ""){
+        else if ((password && Confirmpassword) === ""){
             console.log("something went wrong here 4");
             return res.status(400).send("passowrd can not be empty");
         }

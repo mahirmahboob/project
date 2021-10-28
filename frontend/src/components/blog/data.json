@@ -1,0 +1,41 @@
+[
+    {
+      "userId": "01a",
+      "comId": "012",
+      "fullName": "Amy Washington",
+      "avatarUrl": "https://ui-avatars.com/api/name=Riya&background=random" ,
+      "text": "Hi, loved this post! ",
+      "replies": [
+        {
+          "userId": "02a",
+          "comId": "013",
+    
+          "fullName": "Adam Scott",
+          "avatarUrl": "https://ui-avatars.com/api/name=Adam&background=random" ,
+          "text": "I loved this book, glad you liked this take"
+        },
+        {
+          "userId": "01a",
+          "comId": "014",
+    
+          "fullName": "Amy Washington",
+          "avatarUrl": "https://ui-avatars.com/api/name=Riya&background=random",
+          "text": "😊"
+        }
+      ]
+    },
+    {
+      "userId": "02b",
+      "comId": "017",
+      "fullName": "Lily Potter",
+      "text": "I think this author really did well in developing the relationships between the characters and the plot of the story",
+      "avatarUrl": "https://ui-avatars.com/api/name=Lily&background=random"
+    },
+    {
+      "userId": "01c",
+      "comId": "018",
+      "fullName": "Adrien Aberdeen",
+      "text": "Great review!!!",
+      "avatarUrl": "https://ui-avatars.com/api/name=Derek&background=random"
+    }
+  ]

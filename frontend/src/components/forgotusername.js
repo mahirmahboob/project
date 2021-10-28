@@ -1,5 +1,46 @@
 import React, { Component } from "react";
 
+const appStyle = {
+    height: '250px',
+    display: 'flex'
+};
+
+const formStyle = {
+    margin: 'auto',
+    padding: '10px',
+    borderRadius: '5px',
+    background: '#ebd0b9',
+    width: '290px',
+    display: 'block'
+};
+
+const labelStyle = {
+    margin: '10px 0 5px 0',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontSize: '15px',
+};
+
+const inputStyle = {
+    margin: '5px 0 10px 0',
+    padding: '0px', 
+    border: '1px solid #bfbfbf',
+    borderRadius: '0px',
+    boxSizing: 'border-box',
+    width: '100%'
+};
+
+const submitStyle = {
+    margin: '10px 0 0 0',
+    padding: '7px 7px',
+    border: '1px solid #efffff',
+    borderRadius: '3px',
+    background: '#aaa',
+    width: '100%', 
+    fontSize: '15px',
+    color: 'white',
+    display: 'block'
+};
+
 class forgotusername extends Component {
     constructor() {
         super();
@@ -15,7 +56,7 @@ class forgotusername extends Component {
 
     }
 
-    handleSubmitSignup = (e) => {
+    handleForgotUsername = (e) => {
         e.preventDefault();
         
 
@@ -47,33 +88,37 @@ class forgotusername extends Component {
         const email = this.state.email;
    
 
-     return (  
-        <div>
+     return ( 
+    <div>
+     <div style={{padding: 10}}>
+        <div style={appStyle}>
+            <div style={formStyle}>
+            <b>Forgot Username</b>
             <br/>
-            <form onSubmit={this.handleSubmitSignup}>
+            <br/>
+            <form onSubmit={this.handleForgotUsername}>
                 <table border="0">
                     <tbody>
                         <tr>
-                            <td>email:</td>
-                            <td>
-                                <input type="email" name="email" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={email} onChange={this.handleChange}/>
-                            </td>
+                            <td>Email:</td>
+                            <div style={inputStyle}>
+                                <input type="email" name="email" size="20" autocorrect="off" spellcheck="false"
+                                       autocapitalize="off" value={email} onChange={this.handleChange}/>
+                            </div>
                         </tr>
                         <tr>
-                            <td>Your_Favorite_Dish:</td>
-                            <td>
-                                <input type="Your_Favorite_Dish" name="Your_Favorite_Dish" size="20" autoCorrect="off" spellCheck="false"
-                                       autoCapitalize="off" value={Your_Favorite_Dish} onChange={this.handleChange}/>
-                            </td>
+                            <td>Your Favorite Teacher:</td>
+                            <div style={inputStyle}>
+                                <input type="text" name="Your_Favorite_Dish" size="20"
+                                       required value={Your_Favorite_Dish} onChange={this.handleChange}/>
+                            </div>
                         </tr>
                     </tbody>
                 </table>
                 <br/>
-                <input type="submit" value="Submit"/>
+                <input style={submitStyle} type="submit" value="Submit"/>
             </form>
             <a href="forgot">Forgot your password?</a>
-            <br/>
     <div className="forgot_username">
         {
             this.state.username.map(rec=>(
@@ -83,6 +128,10 @@ class forgotusername extends Component {
             ))
         }
     </div>
+            <br/>
+            </div>
+        </div>
+        </div>
         </div>
         );
     }
