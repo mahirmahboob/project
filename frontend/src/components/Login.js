@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { PropTypes } from 'react'
 // import { Link } from "react-router-dom";
 
 // const url = '/rest/login'
@@ -46,6 +47,7 @@ const submitStyle = {
 class Login extends Component {
     constructor() {
         super();
+        this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
         this.state = {
             username: "",
             password: "",
@@ -76,24 +78,25 @@ class Login extends Component {
 
             if (response.status === 401) {
             alert("Wrong combination, please try again");
-            window.location.href =  'http://localhost:3000/login';
+            window.location.href =  'http://localhost:3000';
             
             }
-            else
+            else if (response.status === 201)
             {
                 
                 //alert("successfully Logged In");
-                this.props.handleLogin()
+                console.log("we found an user");
+                this.props.handleLogin();
                 console.log("sucessfull");
-                this.props.history.push(`/userdashboard/${this.state.username}`, {state: this.state.username});
+                this.props.history.push(`/dashboard/${this.state.username}`, {state: this.state.username});
                 // this is just a test. we redirect the user to the login page. When he have the dashboard, 
                 // we will redirect the user to the proper webpage
                 //window.location.href = 'http://localhost:3000/userdashboard';
             }
             })
-            .catch(function(error) {
+           .catch(function(error) {
             
-                alert("Something went wrong");
+                alert(error);
             });
         }
 

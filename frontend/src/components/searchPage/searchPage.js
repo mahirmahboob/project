@@ -77,7 +77,7 @@ const SearchPage = () => {
             <div style={searchDivStyle}>
                 <input type="search" style={searchStyle} onChange={onFilterTextChange} placeholder="search here..."/>
             </div>
-            <div className="ag-theme-alpine" style={{paddingLeft: 90, height: 600, width: 1250}}>
+            <div className="ag-theme-alpine" style={{paddingLeft: 50, height: 600, width: 1400}}>
                 <AgGridReact
                     rowData={rowData}
                     onGridReady={onGridReady}

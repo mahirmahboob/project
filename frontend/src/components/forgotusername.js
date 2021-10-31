@@ -10,7 +10,7 @@ const formStyle = {
     padding: '10px',
     borderRadius: '5px',
     background: '#ebd0b9',
-    width: '290px',
+    width: '400px',
     display: 'block'
 };
 
@@ -46,7 +46,7 @@ class forgotusername extends Component {
         super();
         this.state = {
             email: "",
-            Your_Favorite_Dish: "",
+            favoriteTeacher: "",
             username: [],
         }
     }
@@ -67,7 +67,7 @@ class forgotusername extends Component {
             },
             body: JSON.stringify({
                 username: this.state.username,
-                Your_Favorite_Dish: this.state.Your_Favorite_Dish,
+                favoriteTeacher: this.state.favoriteTeacher,
                 email: this.state.email,
 
 
@@ -84,7 +84,7 @@ class forgotusername extends Component {
 
     render() {
         const username = this.state.username;
-        const Your_Favorite_Dish = this.state.Your_Favorite_Dish;
+        const favoriteTeacher = this.state.favoriteTeacher;
         const email = this.state.email;
    
 
@@ -109,8 +109,8 @@ class forgotusername extends Component {
                         <tr>
                             <td>Your Favorite Teacher:</td>
                             <div style={inputStyle}>
-                                <input type="text" name="Your_Favorite_Dish" size="20"
-                                       required value={Your_Favorite_Dish} onChange={this.handleChange}/>
+                                <input type="text" name="favoriteTeacher" size="20"
+                                       required value={favoriteTeacher} onChange={this.handleChange}/>
                             </div>
                         </tr>
                     </tbody>

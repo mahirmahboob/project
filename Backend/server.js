@@ -5,45 +5,36 @@
 
 const http = require('http');
 const express = require('express');
-var session = require("express-session");
 const mysql = require('mysql');
 const { response } = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const flash = require('express-flash');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+
 
 //Middleware 
 app.use(express.json());
 
-
+app.use(session({
+    secret: "verygoodsecret",
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(express.urlencoded({ extended: false }));
-//app.use(cors({origin: 'http://localhost:3000/userdashboard/', credentials: true}))
+app.use(require('cookie-parser')()); // i can do this like const cookieParser = require('cookie-parser'); Then, app.use(cookie-parser())
 app.use(cors());
 app.use(flash());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-var MemoryStore =session.MemoryStore;
-app.use(session({
-    secret: "topsecret",
-    cookie: {
-        maxAge: 24*60*60*1000
-    },
-    resave: true,
-    saveUninitialized: true,
-    store: new MemoryStore(),
-    cookie: { secure: false } // Remember to set this
-
-}));
-
+app.use(bodyParser.urlencoded({ extended: true }));
+//passport.js
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 
 //db = database
@@ -80,7 +71,7 @@ app.get('/home/:genre', (req, res) => {
 
         else {
             //console.log(response);
-            //console.log("we are returning a result")
+            
             res.status(201).send(result);
         }
 
@@ -90,32 +81,19 @@ app.get('/home/:genre', (req, res) => {
 // User takes a quiz
 app.post('/takeaquiz', (req, res) => {
     const user_genre1 = req.body.genre;
-  
-
     const age_range = req.body.age;
     const maximum_pages = req.body.page;
     const publication_date = req.body.date;
     const trigger_warning = req.body.triggers;
-    
-    /*
-    console.log(user_genre1);
-    console.log(user_genre2);
-    console.log(user_genre3);
-    console.log(age_range);
-    console.log(maximum_pages);
-    console.log(publication_date);
-    console.log(trigger_warning);
-    */
-
 
 const sqlquery = `SELECT *
     FROM book_information
     WHERE genre = ?
     AND 
-    (age_range = ? AND maximum_pages <= ? AND publication_date >= ? AND trigger_warning = ?) ORDER BY rating LIMIT 3`;
+    (age_range = ? AND maximum_pages <= ? AND publication_date >= ? AND trigger_warning = ?) ORDER BY rating LIMIT 1`;
 
 
-    connection.query(sqlquery, [user_genre1, age_range, maximum_pages,publication_date,trigger_warning], function (err, result){
+    connection.query(sqlquery, [user_genre1, age_range, maximum_pages, publication_date, trigger_warning], function (err, result){
         if (err){
             res.status(404).send("There is some problem");
         }
@@ -175,11 +153,17 @@ app.post('/rest/register', async(req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const Confirmpassword = req.body.Confirmpassword;
-    const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
+    const favoriteTeacher = req.body.favoriteTeacher;
     const email = req.body.email;
-    console.log(email);
+
 
     try {
+
+        connection.query('select email from user_table where email = ?', [email], (err, email) => {
+            if (email.length > 0) {
+                res.status(498).send("email already exist");
+            }
+        })
     // we take the email that user entered and check if that usernmae already exist in our databse
     connection.query('select username from user_table where username = ?', [username], async (err, result) => {
         
@@ -223,7 +207,7 @@ app.post('/rest/register', async(req, res) => {
 
         }
 
-        else if (Your_Favorite_Dish.length <=3){
+        else if (favoriteTeacher.length <=3){
             console.log("something went wrong here 6");
             return res.status(409).send("Favorite dish has to be atleast four character long");
         }
@@ -234,35 +218,8 @@ app.post('/rest/register', async(req, res) => {
             return res.status(417).send("Email field can not be empty and it has to be atleast 7 characters long");
         }
 
-        connection.query('insert into user_bookmark (username) VALUES (?)', username, function(err, res) {
-            if (err)
-            {
-                //console.log("we are not able to add username in the user_bookmark table");
-                res.send({err:err});
-            }
-            else
-            {
-                console.log("we are able to add username in the user_bookmark table");
-            }
-
-        })
-
-        connection.query('insert into user_book_history (username) VALUES (?)', username, function(err, res) {
-            if (err)
-            {
-                //console.log("we are not able to add username in the user_book_history table");
-                res.send({err:err});
-            }
-
-            else
-            {
-                console.log("we are able to add username in the user_book_history table");
-            }
-            
-        })
-
         let hashedpassword = await bcrypt.hash(password, 10);
-        connection.query('insert into user_table set ?', {username: username, password: hashedpassword, email: email, Your_Favorite_Dish: Your_Favorite_Dish },(err, result) => {
+        connection.query('insert into user_table set ?', {username: username, password: hashedpassword, email: email, favoriteTeacher: favoriteTeacher },(err, result) => {
             if (err){
                 console.log("we have problem in the backend");
                 res.send({err:err})
@@ -286,12 +243,12 @@ app.post('/rest/register', async(req, res) => {
 //Forgot Password
 app.post('/forgot', (req, res) =>{
     const username = req.body.username;
-    const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
+    const favoriteTeacher = req.body.favoriteTeacher
     const New_password = req.body.New_password;
     const New_passwordConfirm = req.body.New_passwordConfirm;
 
 
-    if (username  === "" || Your_Favorite_Dish === "" || New_password === "" || New_passwordConfirm === "") {
+    if (username  === "" || favoriteTeacher === "" || New_password === "" || New_passwordConfirm === "") {
         res.status(400).send("Can not leave any of the field blank");
     }
 
@@ -308,7 +265,7 @@ app.post('/forgot', (req, res) =>{
     else 
     {
         
-        connection.query('SELECT * FROM user_table WHERE username = ? AND Your_Favorite_Dish = ?', [username, Your_Favorite_Dish], async (err, result) => {
+        connection.query('SELECT * FROM user_table WHERE username = ? AND favoriteTeacher = ?', [username, favoriteTeacher], async (err, result) => {
             
         if (err) {
             res.send({err:err});
@@ -347,18 +304,18 @@ app.post('/forgot', (req, res) =>{
 
 
 
-
+//forgot username
 app.post('/forgotusername', (req, res) => {
     const email = req.body.email;
-    const Your_Favorite_Dish = req.body.Your_Favorite_Dish;
+    const favoriteTeacher = req.body.favoriteTeacher;
 
-    if (email  === "" || Your_Favorite_Dish === "") {
+    if (email  === "" || favoriteTeacher === "") {
         res.status(400).send("Can not leave any of the field blank");
     }
 
     else 
     {
-        connection.query('select username from user_table where email = ? and Your_Favorite_Dish = ?', [email, Your_Favorite_Dish], (err, result) => {
+        connection.query('select username from user_table where email = ? and favoriteTeacher = ?', [email, favoriteTeacher], (err, result) => {
             if (err)
             {
                 res.send({err:err});
@@ -383,10 +340,10 @@ passport.use(new LocalStrategy(function(username,password, done){
    connection.query('select * from user_table where username = ?', [username],function(err,user){
     if(err)
     {
-        //console.log("we having database problem");
+         console.log("we having database problem");
         return done(err)          
     }
-    else if(user.length == 0)
+    else if(user.length === 0)
     {
         //console.log("there are no account with this username");
         return done(null,false,{message: 'Incorrect user name'}); 
@@ -398,7 +355,7 @@ passport.use(new LocalStrategy(function(username,password, done){
     {
    bcrypt.compare(password, user[0].password, function(err, passwordmatch) {
         if (err){
-            //console.log("we having database problem inside the bcrypt");
+            console.log("we having database problem inside the bcrypt");
             return done(err);
         }
 
@@ -411,7 +368,7 @@ passport.use(new LocalStrategy(function(username,password, done){
 
         else
         {
-            //console.log("we found our user");
+            console.log("We found our user");
             return done(null, user)
         }
       });
@@ -427,13 +384,18 @@ passport.use(new LocalStrategy(function(username,password, done){
 app.post('/rest/login', (req, res, next) => {
 
     passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
+    if (err) { 
+        console.log("error here 1")
+        return next(err); 
+    }
     if (!user) { return res.status(401).send("no user"); }
 
     // req / res held in closure
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      //req.session.save();
+      if (err) { 
+          console.log("error here 2")
+          return next(err); 
+        }
       return res.status(201).send(user);
     });
 
@@ -487,7 +449,7 @@ app.get('/getbook', function(req, res) {
         }
 
         else {
-            console.log('we are returing a results');
+            //console.log('we are returing a results');
             //console.log(result); 
             res.status(201).send(result);
         }

@@ -1,72 +1,53 @@
 import React, { Component } from "react";
 import SearchBar from "../searchbar";
+const url = "/rest/submit/post";
 
 class AddEntry extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      //user: "",
-      book_name: "",
+      title: "",
+      author: "",
+      user: "",
     };
   }
 
 
-  handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
-  }
-
   submitHandler = (e) => {
     e.preventDefault();
-          fetch('http://localhost:5000/addbook', {
-            method: 'POST',
-            redirect: 'follow',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-            //user: this.state.user,
-            book_name: this.state.book_name,
-
-            })
-        }).then(response => {
-
-            if (response.status === 401) {
-            alert("user is not logged in");          
-            }
-            else if (response.status === 201)
-            {
-            alert("Successfully added to the book_mark List");
-            }
-            })
-            .catch(function(error) {
-            
-                alert("Something went wrong");
-            });
-        }
+    console.log("in sumbit handler: ", this.state);
+  };
 
   render() {
-    
-    const {book_name} = this.state;
-    console.log(book_name);
+    const { title, link, user } = this.state;
     return (
       <div>
         <br />
-        <h1
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            fontFamily: 'Courier New',
+            fontSize: '25px'
           }}
         >
-          Add an entry to your to be read list
-        </h1>
+          My Bookshelf
+        </div>
         <br />
         <form onSubmit={this.submitHandler}>
-            <SearchBar />
-            <button className="btn btn-primary" type="submit">
-              Submit
-            </button> 
+          <div>
+            <div style={{paddingLeft:'200px'}}>
+              <SearchBar usr={user} list={"tobelist"}/>
+            </div>
+            <div>
+              <br/>
+              <button style={{backgroundColor:"steelBlue", color:'white', fontFamily: 'Courier New',width:'500px', height:'40px'}} type="submit">
+                Submit
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );

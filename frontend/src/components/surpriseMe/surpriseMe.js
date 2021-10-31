@@ -1,8 +1,6 @@
 import React from "react";
-import {Link} from 'react-router-dom';
-//import { Linking } from 'react-native';
-
-export default class SurpriseMeRecs extends React.Component{
+import './surpriseMe.css';
+export default class Testfetch extends React.Component{
     state = {
         loading:true,
         book:null
@@ -17,20 +15,56 @@ export default class SurpriseMeRecs extends React.Component{
     }
     render(){
         return(
-            <div>
-                {this.state.loading || !this.state.book ? (
+            <body>
+                <div>
+                    {this.state.loading || !this.state.book ? (
                 <div>loading...</div>
                 ):(
-                    <div> 
-                        <div>Title: {this.state.book.book_name}</div>
+                <div>
+                <div className="grid-container">
+                    <div className="a">                    
+                        <img src={this.state.book.PictureLink} height={400} witdth={400} />
+                    </div>
+                    <div className="b">
+                        <div className="chld">
+                        <div className="txt">Title: {this.state.book.book_name}</div>
+                        <div className="txt">Author: {this.state.book.author}</div>
+                        <div className="txts">{this.state.book.Synopsis}</div>
+                        <div className="txtss">Genre: {this.state.book.genre}</div>
+                        <div className="txtss">Publication Year: {this.state.book.publication_date}</div>
+                        <div className="txtss">Rating: {this.state.book.rating}</div>
+                        <div className="txtss">Maximum Pages: {this.state.book.maximum_pages}</div>
+                        <div className="txtss">Age Range: {this.state.book.age_range}</div>
+                        {this.state.book.series? (
+                            <div className="txtss" >Series: Yes</div>
+                        ):(
+                            <div className="txtss">Series: No</div>
+                        )}
+                        {this.state.book.best_seller? (
+                            <div className="txtss">Best Seller: Yes </div>
+                        ):(
+                            <div className="txtss">Best Seller: No</div>
+                        )}
+                        {this.state.book.trigger_warning? (
+                            <div className="txtss">Trigger Warnings: {this.state.book.trigger_warning} </div>
+                        ):(
+                            <div className="txtss">Trigger Warnings: No</div>
+                        )}
+                        <div className="txtss">
+                        <a href={this.state.book.LinkToAmazon} target="_blank">Buy Here</a></div>
+                        </div>
+                    </div>
+                </div>
+ 
+{/*  
+                        <div>Title: {this.state.book.idbook_info}</div>
                         <div>Author: {this.state.book.author}</div>
+                        <img src={this.state.book.picture} height={400} witdth={400} />
                         <div>Genre: {this.state.book.genre}</div>
                         <div>Publication Year: {this.state.book.publication_date}</div>
                         <div>Rating: {this.state.book.rating}</div>
                         <div>Maximum Pages: {this.state.book.maximum_pages}</div>
                         <div>Age Range: {this.state.book.age_range}</div>
-                        <div> Summary: {this.state.book.Synopsis}</div>
-                    
                         {this.state.book.series? (
                             <div>Series: Yes</div>
                         ):(
@@ -41,23 +75,19 @@ export default class SurpriseMeRecs extends React.Component{
                         ):(
                             <div>Best Seller: No</div>
                         )}
-                        {this.state.book.trigger_warning? (
-                            <div>Trigger Warnings: {this.state.book.trigger_warning} </div>
+                        {this.state.book.triggers? (
+                            <div>Trigger Warnings: {this.state.book.triggers} </div>
                         ):(
                             <div>Trigger Warnings: No</div>
                         )}
-                        {
-                            this.state.book.LinkToAmazon
-                            ?<div><a href={this.state.book.LinkToAmazon} target="_blank"> Purchase Link</a></div>
-                            : this.state.book.LinkToAmazon  
-                        }
-
-                        <img src={this.state.book.PictureLink} height={400} witdth={400} />
                         
+                        <div>Buy Here: {this.state.book.buy}</div>
+                        <div class="text-center"> Synopsis: {this.state.book.synopsis}</div> */}
                     </div>
                 )}
                 
             </div>  
+            </body>
         );
     }
 }

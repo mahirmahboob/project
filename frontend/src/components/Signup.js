@@ -11,7 +11,7 @@ const formStyle = {
     padding: '10px',
     borderRadius: '5px',
     background: '#ebd0b9',
-    width: '340px',
+    width: '400px',
     display: 'block'
 };
 
@@ -49,7 +49,7 @@ class Signup extends Component {
             email: "",
             password: "",
             Confirmpassword: "",
-            Your_Favorite_Dish: "",
+            favoriteTeacher: "",
             account: {},
         }
     }
@@ -70,7 +70,7 @@ class Signup extends Component {
                 username: this.state.username,
                 password: this.state.password,
                 Confirmpassword: this.state.Confirmpassword,
-                Your_Favorite_Dish: this.state.Your_Favorite_Dish,
+                favoriteTeacher: this.state.favoriteTeacher,
                 email: this.state.email,
     })
         }).then(response => {
@@ -80,6 +80,10 @@ class Signup extends Component {
             else if (response.status ===406)
             {
                 alert("Your Password and Confirm Password does not match");
+            }
+             else if (response.status ===498)
+            {
+                alert("Email already exist, please select a different Email Id");
             }
             else if (response.status === 400)
             {
@@ -103,7 +107,9 @@ class Signup extends Component {
 
             else if (response.status === 201) {
             alert("Succesfully Signup Up!");
-            window.location.href =  'http://localhost:3000/login';
+            
+            window.location.href =  'http://localhost:3000';
+            
 
             }
             })
@@ -117,7 +123,7 @@ class Signup extends Component {
         const username = this.state.username;
         const password = this.state.password;
         const Confirmpassword = this.state.Confirmpassword;
-        const Your_Favorite_Dish = this.state.Your_Favorite_Dish;
+        const favoriteTeacher = this.state.favoriteTeacher;
         const email = this.state.email;
      return (  
         <div style={{padding: 10}}>
@@ -142,7 +148,7 @@ class Signup extends Component {
                                 <tr>
                                     <td>Email:</td>
                                     <td>
-                                        <input type="email" name="email" size="20" autocorrect="off" spellcheck="false"
+                                        <input type="Email" name="email" size="20" autocorrect="off" spellcheck="false"
                                             autocapitalize="off" value={this.state.email} onChange={this.handleChange}/>
                                     </td>
                                 </tr>
@@ -163,8 +169,8 @@ class Signup extends Component {
                                                                 <tr>
                                     <td>Who is your Favorite Teacher:</td>
                                     <td>
-                                        <input type="text" name="Your_Favorite_Dish" size="20"
-                                            required value={this.state.Your_Favorite_Dish} onChange={this.handleChange}/>
+                                        <input type="text" name="favoriteTeacher" size="20"
+                                            required value={this.state.favoriteTeacher} onChange={this.handleChange}/>
                                     </td>
                                 </tr>
                             </tbody>

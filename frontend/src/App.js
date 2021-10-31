@@ -10,14 +10,16 @@ import { SearchPage } from "./components/searchPage/searchPage";
 import GenreRecs from "./components/genre/genre";
 import QuizRecs from "./components/quiz/quiz";
 import SurpriseMeRecs from "./components/surpriseMe/surpriseMe";
-import userdashboard from "./components/dashboard/userdashboard";
+import dashboard from "./components/dashboard/dashboard";
 import forgot from "./components/forgot";
 import forgotusername from "./components/forgotusername";
 import blog from "./components/blog/blog";
+import AboutUs from "./components/AboutUs/aboutus.js";
+import { PropTypes } from 'react'
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isLoggedIn: false,
     };
@@ -30,6 +32,7 @@ class App extends Component {
       isLoggedIn: true,
     });
   }
+
 
   logout=() =>{
     this.setState({
@@ -72,10 +75,11 @@ class App extends Component {
               <Route path="/recGenre" component={GenreRecs} />
               <Route path="/recQuiz" component={QuizRecs} />
               <Route path="/recSurpriseMe" component={SurpriseMeRecs} />
-              <Route path="/userdashboard" component={userdashboard} />
+              <Route path="/dashboard" component={dashboard} />
               <Route path="/forgot" component={forgot} />
               <Route path="/forgotusername" component={forgotusername} />
               <Route path="/blog" component={blog} />
+              <Route path="/AboutUs" component={AboutUs} />
 
               {/* <Route component={Notfound} /> */}
             </div>

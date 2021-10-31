@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import SearchBar from "../searchbar";
 import ToBeReadList from "./tobereadlistings";
 
-
 const url = "/rest/{usr}/toberead"; //temp url hosting on json server
 
 class ToBeRead extends Component {
@@ -26,9 +25,18 @@ class ToBeRead extends Component {
   render() {
     console.log(this.state.articles);
     return (
-      <div>
-          To be Read: 
-        <ToBeReadList toberead={this.state.toberead} />
+
+      <div >
+        <div style={{width:'890px', height:'340px', overflowY:'scroll'}}>
+          <br/>
+          <img alt="paris cover" src="/img/blog4.jpg" width="210" height="300" />
+          <img alt="rose cover" src="/img/rose.png" width="210" height="300"/>
+          <img alt="rose cover" src="/img/hundred.jpg" width="210" height="300"/>
+          <img alt="wuthering heights cover" src="/img/heights.jpg" width="210" height="300"/>
+
+          <ToBeReadList toberead={this.state.toberead} />
+        </div>
+        
       </div>
     );
   }

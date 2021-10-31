@@ -10,7 +10,7 @@ const formStyle = {
     padding: '10px',
     borderRadius: '5px',
     background: '#ebd0b9',
-    width: '290px',
+    width: '400px',
     display: 'block'
 };
 
@@ -46,7 +46,7 @@ class forgot extends Component {
         super();
         this.state = {
             username: "",
-            Your_Favorite_Dish: "",
+            favoriteTeacher: "",
             New_password: "",
             New_passwordConfirm: "",
         }
@@ -68,7 +68,7 @@ class forgot extends Component {
             },
             body: JSON.stringify({
                 username: this.state.username,
-                Your_Favorite_Dish: this.state.Your_Favorite_Dish,
+                favoriteTeacher: this.state.favoriteTeacher,
                 New_password: this.state.New_password,
                 New_passwordConfirm: this.state.New_passwordConfirm,
 
@@ -94,8 +94,9 @@ class forgot extends Component {
             }
 
             else if (response.status === 201) {
-            alert("Password was updated, Please login again with the new password");
-            window.location.href =  'http://localhost:3000/login';
+            alert("Password was updated, please login!!");
+            //this.props.handleLogin();
+            window.location.href = 'http://localhost:3000/';
             }
             })
             .catch(function(error) {
@@ -108,7 +109,7 @@ class forgot extends Component {
 
     render() {
         const username = this.state.username;
-        const Your_Favorite_Dish = this.state.Your_Favorite_Dish;
+        const favoriteTeacher = this.state.favoriteTeacher;
         const New_password = this.state.New_password;
         const New_passwordConfirm = this.state.New_passwordConfirm;
    
@@ -125,7 +126,7 @@ class forgot extends Component {
                 <table border="0">
                     <tbody>
                         <tr>
-                            <td>username:</td>
+                            <td>Username:</td>
                             <div style={inputStyle}>
                                 <input type="username" name="username" size="20" autocorrect="off" spellcheck="false"
                                        autocapitalize="off" value={username} onChange={this.handleChange}/>
@@ -148,8 +149,8 @@ class forgot extends Component {
                         <tr>
                             <td>Who is your favorite Teacher:</td>
                             <div style={inputStyle}>
-                                <input type="text" name="Your_Favorite_Dish" size="20"
-                                       required value={Your_Favorite_Dish} onChange={this.handleChange}/>
+                                <input type="text" name="favoriteTeacher" size="20"
+                                       required value={favoriteTeacher} onChange={this.handleChange}/>
                             </div>
                         </tr>
                     </tbody>

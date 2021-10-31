@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #fff7e0;
+  padding-bottom: 0;
+}
+
+.about-cards {
+  background-color: #fef5ed;
+  box-shadow: 9px 9px 15px 2px rgba(0, 0, 0, 0.39);
+  padding: 20px;
+}
+
+.about-cards > p {
+  margin-top: 5px;
+  text-align: left;
+  line-height: 3;
+}
+
+.row {
+  width: 400px;
+  margin: 37px 0px;
+}
+
+.item {
+  max-height: 800px;
+}
+
+.head {
+  font-size: 100px;
+  background-color: #fff7e0;
+  font-family: "Festive", cursive;
+  text-align: center;
+  padding-bottom: 50px;
+  padding-top: 10px;
+}

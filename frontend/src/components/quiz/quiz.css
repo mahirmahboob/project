@@ -1,0 +1,46 @@
+.header {
+  padding: 10px;
+  text-align: center;
+  color: black;
+  font-size: 50px;
+}
+
+.question {
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+.selected {
+  padding: 10px;
+  text-align: center;
+}
+
+.itself {
+  border: 3px solid rgb(238, 181, 148);
+  background-color: rgb(238, 122, 87);
+  text-align: center;
+  font-size: 20px;
+  font-family: "Railway";
+  width: 200px;
+  height: 50px;
+  color: rgb(250, 233, 228);
+}
+
+.butt {
+  border: 3px solid rgb(238, 181, 148);
+  width: 80px;
+  height: 50px;
+  text-align: center;
+  padding-right: 5px;
+  background-color: rgb(238, 122, 87);
+}
+
+.flx {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.quiz-recommendation {
+  margin-top: 30px;
+  text-align: center;
+}

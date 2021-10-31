@@ -14,8 +14,8 @@ const Comments = () => {
    comment.map(i => {count+=1; i.replies && i.replies.map(i=> count+=1)} )
 
    return (
-      <div className="commentSection" style={{fontSize:11}}>
-        <div className="header">{count} Comments</div>
+      <div className="commentSection" style={{fontSize:15}}>
+        <div>{count} Comments</div>
 
         <CommentSection currentUser={userId && { userId: userId, avatarUrl: avatarUrl, name: name }} commentsArray={comment}
         setComment={setComment} signinUrl={signinUrl} signupUrl={signupUrl}/>

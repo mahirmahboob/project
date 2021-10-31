@@ -1,6 +1,6 @@
-
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'; 
+import './quiz.css';
 const url = "/takeaquiz";
 
 // var res = {name: "", picture: "",author: "", genre: "", synopsis: "" };
@@ -52,11 +52,14 @@ class QuizRecs extends Component {
       const {genre, age, page, date, triggers } = this.state;
 
       return (
+        <body className="body">
         <div className="session">
-        <h1>Take a quiz to find your next read!</h1>
+        <h1 className='header'>Quiz</h1>
           <div className="register-form">
             <form onSubmit={this.onSubmit}>
-              <select value={this.value} name="genre" onChange={this.onChange}> Pick the first genre
+              <div className="question">Pick the genre:</div>
+              <div className="selected">
+              <select className="itself" value={this.value} name="genre" onChange={this.onChange}> 
                 <option value="romance">Romance</option>
                 <option value="history">History</option>
                 <option value="mystery">Mystery</option>
@@ -67,13 +70,19 @@ class QuizRecs extends Component {
                 <option value="adventure">Adventure</option>
                 <option value="detective">Detective</option>
               </select>
-              <select value={this.value} name="age" onChange={this.onChange}> Pick a age range
+              </div>
+              <div className="question">Pick a age range:</div>
+              <div className="selected">
+              <select className="itself" value={this.value} name="age" onChange={this.onChange}> 
                 <option value="child">child</option>
                 <option value="young adult">young adult</option>
                 <option value="adult">adult</option>
                 <option value="all">all</option>
               </select>
-              <select value={this.value} name="page" onChange={this.onChange}> Pick a page range
+              </div>
+              <div className="question">Pick a page range:</div>
+              <div className="selected">
+              <select className="itself" value={this.value} name="page" onChange={this.onChange}> 
                 <option value="100">100</option>
                 <option value="150">150</option>
                 <option value="200">200</option>
@@ -82,7 +91,10 @@ class QuizRecs extends Component {
                 <option value="350">350</option>
                 <option value="400">400+</option>
               </select>
-              <select value={this.value} name="date" onChange={this.onChange}> Pick publication date
+              </div>
+              <div className="question">Pick a publication date:</div>
+              <div className="selected">
+              <select className="itself" value={this.value} name="date" onChange={this.onChange}> 
                 <option value="1960">1960</option>
                 <option value="1970">1970</option>
                 <option value="1980">1980</option>
@@ -94,11 +106,14 @@ class QuizRecs extends Component {
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
               </select>
-              <select value={this.value} name="triggers" onChange={this.onChange}> Pick a triggers
-                <option value="violence">violence</option>
-                <option value="death">death</option>
-                <option value="horror">horror</option>
-                <option value="blood">blood</option>
+              </div>
+              <div className="question">Select any triggers:</div>
+              <div className="selected">
+              <select className="itself" value={this.value} name="triggers" onChange={this.onChange}> 
+                <button value="violence">violence</button>
+                <button value="death">death</button>
+                <button value="horror">horror</button>
+                <button value="blood">blood</button>
                 <option value="suicide">suicide</option>
                 <option value="kidnapping">kidnapping</option>
                 <option value="war">war</option>
@@ -106,10 +121,14 @@ class QuizRecs extends Component {
                 <option value="Animal cruelty">Animal cruelty</option>
                 <option value="No trigger warning">No trigger warning</option>
               </select>
-              <Button type='Submit' variant="contained" color="primary">
-                Submit
-              </Button>
+              </div>
+              <div className="flx">
+              <div className="butt">
+                <Button class="butt" type='Submit' variant="contained" style={{color:"rgb(250, 233, 228)"}}>Submit</Button>
+              </div>
+              </div>
             </form>
+            
             <div className="quiz-recommendation">
                   {
                       this.state.recommendations.map(rec=>(
@@ -122,6 +141,7 @@ class QuizRecs extends Component {
                           <h2> Publication Date: {rec.publication_date}</h2>
                           <h2> Best Seller: {rec.best_seller}</h2>
                           <h2>Series: {rec.series}</h2>
+                          <h2>Synopsis: {rec.Synopsis}</h2>
                           <h2><a href={rec.LinkToAmazon} target="_blank"> Purchase Link</a> </h2>
                           <img src={rec.PictureLink} height={400} witdth={400} />
                           </div>
@@ -130,33 +150,9 @@ class QuizRecs extends Component {
             </div>
           </div>
         </div>
-
+        </body>
       );
   }
 }
 
 export default QuizRecs;
-
-
-/*
-class QuizRecs extends Component {
-    constructor() {
-        super();
-        this.state = {
-           
-        }
-    }
-    
-    render() {
-     
-     return (  
-        <div>
-         Take a quiz
-         <Quiz quiz={quiz}/>
-        </div>
-    );
-    }
-}
-
-
-*/

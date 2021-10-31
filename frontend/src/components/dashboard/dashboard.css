@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  height: 1000px;
+  background: white;
+  margin: auto;
+  /* padding: 10px; */
+}
+
+.one {
+  /*padding-left: 50px; */
+  width: 600px;
+  height: 700px;
+  color: white;
+  background: rgb(75, 101, 135);
+}
+
+.two {
+  margin-left: 1px;
+  width: 900px;
+  height: 700px;
+  background: rgb(243, 245, 241);
+}
