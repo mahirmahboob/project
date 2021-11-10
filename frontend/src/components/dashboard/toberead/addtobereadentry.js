@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import SearchBar from "../searchbar";
-const url = "/rest/submit/post";
+
+
+
+const usr = JSON.parse(localStorage.getItem('current_user'));
+const url = `/rest/submit/${usr}`;
 
 class AddEntry extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       title: "",
-      author: "",
       user: "",
     };
   }
@@ -16,7 +18,7 @@ class AddEntry extends Component {
 
   submitHandler = (e) => {
     e.preventDefault();
-    console.log("in sumbit handler: ", this.state);
+    
   };
 
   render() {

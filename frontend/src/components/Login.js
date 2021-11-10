@@ -83,15 +83,10 @@ class Login extends Component {
             }
             else if (response.status === 201)
             {
-                
-                //alert("successfully Logged In");
-                console.log("we found an user");
+                const users = this.state.username;
+                localStorage.setItem('current_user', JSON.stringify(users))
                 this.props.handleLogin();
-                console.log("sucessfull");
                 this.props.history.push(`/dashboard/${this.state.username}`, {state: this.state.username});
-                // this is just a test. we redirect the user to the login page. When he have the dashboard, 
-                // we will redirect the user to the proper webpage
-                //window.location.href = 'http://localhost:3000/userdashboard';
             }
             })
            .catch(function(error) {

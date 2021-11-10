@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import SearchBar from "../searchbar";
 import ToBeReadList from "./tobereadlistings";
 
-const url = "/rest/{usr}/toberead"; //temp url hosting on json server
+const usr = JSON.parse(localStorage.getItem('current_user'));
+const url = `/rest/toberead/${usr}`; 
 
 class ToBeRead extends Component {
   constructor() {
     super();
     this.state = {
-      toberead: "",
+      toberead: [],
     };
   }
 
@@ -23,20 +24,22 @@ class ToBeRead extends Component {
   }
 
   render() {
-    console.log(this.state.articles);
+    //console.log(this.state.articles);
     return (
-
       <div >
         <div style={{width:'890px', height:'340px', overflowY:'scroll'}}>
           <br/>
-          <img alt="paris cover" src="/img/blog4.jpg" width="210" height="300" />
-          <img alt="rose cover" src="/img/rose.png" width="210" height="300"/>
-          <img alt="rose cover" src="/img/hundred.jpg" width="210" height="300"/>
-          <img alt="wuthering heights cover" src="/img/heights.jpg" width="210" height="300"/>
-
+            <div className="recs mt-44">
+              {
+                this.state.toberead.map(rec => (
+                  <div key={rec.PictureLink} className="book-card">
+                  <img src={rec.PictureLink} height={300} witdth={210} />
+                  </div>
+                  ))
+              }
+            </div>
           <ToBeReadList toberead={this.state.toberead} />
         </div>
-        
       </div>
     );
   }

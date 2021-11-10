@@ -43,8 +43,8 @@ export default class SearchBar extends Component {
   }
 
   render() {
-      console.log(this.state.selectOptions);
-    console.log(this.state.selectOptions)
+      //console.log(this.state.selectOptions);
+    //console.log(this.state.selectOptions)
     return (
       <div style={{justifyContent:'center',width:'500px', backgroundColor:'gray'}}>
         <Select options={this.state.selectOptions} />

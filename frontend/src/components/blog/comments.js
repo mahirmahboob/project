@@ -1,26 +1,66 @@
-import React, { PureComponent, useState } from 'react'
+import React, {PureComponent, useEffect, useState } from "react";
 import data from "./data.json"
 import { CommentSection } from 'react-comments-section'
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import Button from 'react-bootstrap/Button'; 
 
-
-const Comments = () => {
-   const [comment, setComment] = useState(data)
-   const userId = "01a"
-   const avatarUrl = "https://ui-avatars.com/api/name=Riya&background=random"
-   const name = "xyz"
-   const signinUrl = "/login"
-   const signupUrl = "/signup"
-   let count = 0
-   comment.map(i => {count+=1; i.replies && i.replies.map(i=> count+=1)} )
-
-   return (
-      <div className="commentSection" style={{fontSize:15}}>
-        <div>{count} Comments</div>
-
-        <CommentSection currentUser={userId && { userId: userId, avatarUrl: avatarUrl, name: name }} commentsArray={comment}
-        setComment={setComment} signinUrl={signinUrl} signupUrl={signupUrl}/>
-     </div>
-   );
- }
+ function Comments() {
+  //let { id } = useParams();
+  const [comments, setComments] = useState([]);   //all the comments that we will display
+  const [newComment, setNewComment] = useState(""); //new comments that needs to be added
  
- export default Comments;
+  useEffect(() => {
+  
+    axios.get(`http://localhost:5000//getallthecomments`).then((response) => {
+      setComments(response.data);
+    });
+  }, []);
+
+
+  
+  const addComment = () => {
+    axios
+      .post("http://localhost:5000/postacomment", {
+        commentBody: newComment,
+        //PostId: id,
+      })
+      .then((response) => {
+        const commentToAdd = { commentBody: newComment };
+        setComments([...comments, commentToAdd]);
+        setNewComment("");
+        //console.log(comments);
+      });
+  };
+  
+  return (
+    <div className="postPage">
+      <div className="rightSide">
+        <div className="addCommentContainer">
+          <input
+            type="text"
+            placeholder="Comment..."
+            autoComplete="off"
+            value={newComment}
+            onChange={(event) => {
+              setNewComment(event.target.value);
+            }}
+          />
+          <button onClick={addComment}> Add Comment</button>
+        </div>
+        <div className="listOfComments">
+          {comments.map((comment, key) => {
+            return (
+              <div key={key} className="comment">
+                {comment.commentBody}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+export default Comments;

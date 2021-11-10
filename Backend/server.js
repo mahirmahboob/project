@@ -56,6 +56,8 @@ connection.connect((err) => {
     }
 });
 
+
+
 /*
 This end-point will return books based on the genre that user selected. User can only select one genre
 */
@@ -86,6 +88,7 @@ app.post('/takeaquiz', (req, res) => {
     const publication_date = req.body.date;
     const trigger_warning = req.body.triggers;
 
+
 const sqlquery = `SELECT *
     FROM book_information
     WHERE genre = ?
@@ -99,7 +102,7 @@ const sqlquery = `SELECT *
         }
         else{
             
-            //console.log(result[0].author);
+            //console.log(result);
             res.status(201).send(result);
         }
     })
@@ -496,6 +499,93 @@ app.get('/userdashboard/:user', function(req, res) {
 */
 
 
+
+//After the MVP presentation--------------------------------------------------------------------------------------------------------------
+
+//When a user post a  comment in the blog section, this API will get called.
+app.post('/postacomment', (req, res) => {
+    const new_comment = req.body.commentBody;
+    console.log(req.body.commentBody);
+    connection.query('insert into blog VALUES (?)', new_comment, function (err, result) {
+
+        if (err) {
+            console.log("new comment is not being added to the database");
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            console.log("we successfully added the new comment to the database");
+            res.status(201).send(result);
+        }
+
+    })
+    
+})
+
+
+//When user clicks on the blog comment section, then we will use this API to display all the comments
+
+app.get('/getallthecomments', (req, res) => {
+    connection.query('select comment from blog', function (err, result) {
+
+        if (err) {
+            console.log("we are having problem sending all the comments to the frontend")
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            console.log("we are sending all the comments to the frontend")
+            res.status(201).send(result);
+        }
+
+    })
+    
+})
+
+
+//Kinda working on the dashboard
+app.get('/rest/toberead/:usr', (req, res) => {
+    const user = (req.params.usr);
+    //console.log(genre_given_by_user);
+    connection.query('SELECT PictureLink FROM user_bookmark WHERE username= ? ', user, function (err, result) {
+
+        if (err) {
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            //console.log("it's working");
+            res.status(201).send(result);
+        }
+
+    })
+
+})
+
+
+//This is incomplete, i just copied and pasted the code. I need to work on this
+app.post('/rest/submit/:usr', (req, res) => {
+    const username = (req.params.usr);
+    const book_name = req.body.book_naame;
+
+    connection.query('insert into user_bookmark set ?', {usernmae: username, PictureLink: PictureLink}, function (err, result) {
+
+        if (err) {
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            //console.log("it's working");
+            res.status(201).send(result);
+        }
+
+    })
+
+})
 
 
 

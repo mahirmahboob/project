@@ -38,6 +38,7 @@ class App extends Component {
     this.setState({
       isLoggedIn: false,
     });
+    localStorage.clear()
   }
 
   render() {
