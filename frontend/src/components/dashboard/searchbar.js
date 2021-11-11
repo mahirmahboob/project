@@ -23,6 +23,13 @@ export default class SearchBar extends Component {
       selectOptions : [],
       book_name: "",
     }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  
+  handleChange = (e) => {
+      this.setState({ book_name: e.target.value });
+      this.props.update_title(e.target.value);
   }
 
  async getOptions(){
@@ -35,22 +42,31 @@ export default class SearchBar extends Component {
 
     }))
     this.setState({selectOptions: options})
-
   }
 
   componentDidMount(){
       this.getOptions()
   }
 
-  render() {
-      //console.log(this.state.selectOptions);
-    //console.log(this.state.selectOptions)
+
+  render() {  
+    //console.log(this.state.book_name);  
     return (
       <div style={{justifyContent:'center',width:'500px', backgroundColor:'gray'}}>
-        <Select options={this.state.selectOptions} />
+        
+          <select value={this.state.book_name} onChange={this.handleChange}>
+        {this.state.selectOptions.map(function(data, key){  return (
+          <option key={key} value={data.key}>{data.value}</option> 
+          )
+        })}
+          </select>    
       </div>
     )
   }
 }
 //https://react-select.com/home
 //https://github.com/JedWatson/react-select
+
+/*
+ <Select options={this.state.selectOptions} />
+*/

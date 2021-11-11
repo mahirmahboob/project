@@ -371,7 +371,7 @@ passport.use(new LocalStrategy(function(username,password, done){
 
         else
         {
-            console.log("We found our user");
+            //console.log("We found our user");
             return done(null, user)
         }
       });
@@ -546,6 +546,8 @@ app.get('/getallthecomments', (req, res) => {
 
 
 //Kinda working on the dashboard
+//This is the bookshef
+//This is the endpoint that will display the bookshelf
 app.get('/rest/toberead/:usr', (req, res) => {
     const user = (req.params.usr);
     //console.log(genre_given_by_user);
@@ -566,29 +568,56 @@ app.get('/rest/toberead/:usr', (req, res) => {
 })
 
 
-//This is incomplete, i just copied and pasted the code. I need to work on this
+/* This endpoint will allow you to add a book to the user bookshelf.  I should look at this more carefully.*/
 app.post('/rest/submit/:usr', (req, res) => {
+
     const username = (req.params.usr);
-    const book_name = req.body.book_naame;
+    const user_book_name = req.body.title;
+    
+    connection.query('select book_name from user_bookmark where username = ? AND book_name = ?', [username, user_book_name], function (err, result) {
 
-    connection.query('insert into user_bookmark set ?', {usernmae: username, PictureLink: PictureLink}, function (err, result) {
-
-        if (err) {
-            res.status(404).send('Not working');
+        if (err) 
+        {
+            res.send({err:err});
         }
 
-        else {
-            //console.log(response);
-            //console.log("it's working");
-            res.status(201).send(result);
+        else if (result.length >= 1) {
+            res.status(406).send('That book already exist in the bookshelf');
+        }
+       
+        else
+        {
+            
+            connection.query('select * from book_information where book_name = ?', [user_book_name], function (err, book_info) 
+            { 
+                
+                if (err)
+                {
+                    res.send({err:err});
+                }
+                else if (book_info.length === 1)
+                {
+                    connection.query('insert into user_bookmark set ?', {username: username, book_name: book_info[0].book_name, genre: book_info[0].genre, author: book_info[0].author, rating: book_info[0].rating, age_range: book_info[0].age_range, maximum_pages: book_info[0].maximum_pages, publication_date: book_info[0].publication_date, trigger_warning: book_info[0].trigger_warning, best_seller: book_info[0].best_seller, series: book_info[0].series, PictureLink: book_info[0].PictureLink, LinkToAmazon: book_info[0].LinkToAmazon, Synopsis: book_info[0].Synopsis}, function (err, resss) {
+                        if (err) 
+                        {
+                            
+                            res.status(400).send("could not add book to the user bookshelf");
+                        }
+
+                        else
+                        {
+                            
+                            res.status(201).send ("we were able to add a book to the database")
+
+                        }
+                    })
+                }
+
+            })  
         }
 
     })
-
 })
-
-
-
 
 
 /*

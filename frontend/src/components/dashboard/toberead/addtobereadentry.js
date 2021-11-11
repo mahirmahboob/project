@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import SearchBar from "../searchbar";
 
-
-
 const usr = JSON.parse(localStorage.getItem('current_user'));
 const url = `/rest/submit/${usr}`;
 
@@ -11,18 +9,51 @@ class AddEntry extends Component {
     super(props);
     this.state = {
       title: "",
-      user: "",
+      user: usr,
     };
+    this.update_title = this.update_title.bind(this);
   }
 
+   update_title(newdata) {
+      this.setState({ title: newdata}, ()=>{
+      console.log(this.state.title);
+    })
+  }
 
   submitHandler = (e) => {
     e.preventDefault();
+  
+    fetch(url , {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+          title: this.state.title,
     
+      })
+    }).then(response => {
+
+            if (response.status === 406) {
+            alert("That book already exist in your bookshelf");
+            }
+            else if (response.status === 400) 
+            {
+              alert("could not add book to your bookshelf")
+            }
+            else if (response.status === 201)
+            {
+              alert("Succesfull adding the book")
+            }
+            })
+           .catch(function(error) {
+            
+                alert(error);
+            });
   };
 
   render() {
-    const { title, link, user } = this.state;
+    const { title, user } = this.state;
     return (
       <div>
         <br />
@@ -41,7 +72,7 @@ class AddEntry extends Component {
         <form onSubmit={this.submitHandler}>
           <div>
             <div style={{paddingLeft:'200px'}}>
-              <SearchBar usr={user} list={"tobelist"}/>
+               <SearchBar data={this.state.title} update_title={this.update_title}/>
             </div>
             <div>
               <br/>

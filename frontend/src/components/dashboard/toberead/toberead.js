@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import SearchBar from "../searchbar";
 import ToBeReadList from "./tobereadlistings";
 
+
+
+//This is the bookshelf...... This is where we will add user book.
+
 const usr = JSON.parse(localStorage.getItem('current_user'));
 const url = `/rest/toberead/${usr}`; 
 

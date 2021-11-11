@@ -83,9 +83,10 @@ class Login extends Component {
             }
             else if (response.status === 201)
             {
+                this.props.handleLogin();
                 const users = this.state.username;
                 localStorage.setItem('current_user', JSON.stringify(users))
-                this.props.handleLogin();
+                //window.location.href = `http://localhost:3000/dashboard/${this.state.username}`;
                 this.props.history.push(`/dashboard/${this.state.username}`, {state: this.state.username});
             }
             })
