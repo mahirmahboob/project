@@ -6,10 +6,10 @@ import { render } from "@testing-library/react";
 
 const ToBeReadList = (toberead) => {
 
-  function handleDelete(title, author) {
+  function handleDelete(title) {
     render(
       <div>
-        <DeleteEntry title={title} author={author} />
+        <DeleteEntry title={title} />
       </div>
     );
   }
@@ -27,11 +27,8 @@ const ToBeReadList = (toberead) => {
       return toberead.map((data) => {
         return (
           <div className="bookshelfentry"> 
-              Title: {data.title}
-              Image: {data.image}
-              Author: {data.author}
-              Upvotes: {data.upvotes}
-              <Button onClick={() => handleDelete(data.title, data.author)}>
+              Title: {data.book_name}
+              <Button onClick={() => handleDelete(data.book_name)}>
                 Delete Book
               </Button>
               {/* <Button onClick={() => handleUpvote(data.upvote)}>Upvote</Button> */}

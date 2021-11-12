@@ -88,6 +88,13 @@ app.post('/takeaquiz', (req, res) => {
     const publication_date = req.body.date;
     const trigger_warning = req.body.triggers;
 
+    
+    console.log(user_genre1);
+    console.log(age_range);
+    console.log(maximum_pages);
+    console.log(publication_date);
+    console.log(trigger_warning);
+
 
 const sqlquery = `SELECT *
     FROM book_information
@@ -103,6 +110,8 @@ const sqlquery = `SELECT *
         else{
             
             //console.log(result);
+            console.log("we have a result");
+            console.log(result);
             res.status(201).send(result);
         }
     })
@@ -545,13 +554,13 @@ app.get('/getallthecomments', (req, res) => {
 })
 
 
-//Kinda working on the dashboard
+//Working
 //This is the bookshef
 //This is the endpoint that will display the bookshelf
 app.get('/rest/toberead/:usr', (req, res) => {
     const user = (req.params.usr);
     //console.log(genre_given_by_user);
-    connection.query('SELECT PictureLink FROM user_bookmark WHERE username= ? ', user, function (err, result) {
+    connection.query('SELECT * FROM user_bookmark WHERE username= ? ', user, function (err, result) {
 
         if (err) {
             res.status(404).send('Not working');
@@ -619,6 +628,53 @@ app.post('/rest/submit/:usr', (req, res) => {
     })
 })
 
+
+
+
+//This is the endpoint that will delete  book from the user bookshelf
+
+app.delete('/rest/delete/:usr', (req, res) => {
+    
+    nameofthebook = req.body.title;
+    nameoftheuser = req.params.usr;
+
+    console.log(nameofthebook);
+    console.log(nameoftheuser);
+
+    connection.query('select * from user_bookmark where username = ? AND book_name = ?', [nameoftheuser, nameofthebook], (err, book) => {
+        if (err)
+        {
+            //console.log('we have an error here');
+            res.send(err);
+        }
+
+        else if(book.length === 0)
+        {
+            //console.log('we have an error here 2 ');
+            res.status(404).send("This book does not exist")
+        }
+
+        // if it goes to the else statement that means this book exist, so all we have to do is delete.
+        else
+        {
+            connection.query('Delete from user_bookmark where username = ? AND book_name = ?', [nameoftheuser, nameofthebook], (error, deleteres) => {
+                if (error)
+                {
+                    //console.log('we have an error here 2 ');
+                    res.send(error)
+                }
+
+                else
+                {
+                    //console.log('Success');
+                    res.status(201).send("We succesfully deleted")
+                }
+            })
+        }
+
+    })
+
+})
 
 /*
 Copied this code from stackoverflow...
