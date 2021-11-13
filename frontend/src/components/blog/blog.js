@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Box from '@material-ui/core/Box';
 import Popup from 'reactjs-popup';
-import Comments from "./comments";
+import CommentsOld from "./commentsOld";
 import './blog.css'
 class Blog extends Component {
     constructor() {
@@ -99,7 +99,7 @@ class Blog extends Component {
                 of a shy person at a cocktail party, often comic only in single clauses. It’s a first novel that reads like the work of an author who has published
                 many books over many years. […] <a href="https://www.nytimes.com/2018/02/12/books/review/lisa-halliday-asymmetry.html">Link</a></p>
                 </div>
-                    <Popup 
+                    <Popup
                         trigger={<button className="button" style={{backgroundColor: '#d4c2b1', 
                         color: 'black',
                         padding: '15px 32px',
@@ -115,7 +115,7 @@ class Blog extends Component {
                             </button>
                             <div> Comments </div>
                             <div className="content">                            
-                                <Comments/>
+                                <CommentsOld/>
                             </div>
                             
                         </div>
@@ -164,7 +164,7 @@ class Blog extends Component {
                             </button>
                             <div> Comments </div>
                             <div className="content">                            
-                                <Comments/>
+                                <CommentsOld/>
                             </div>
                             
                         </div>
@@ -179,3 +179,4 @@ class Blog extends Component {
 }
 
 export default Blog;
+//boxShadow: '5px 5px 5px 2px #bebebe'

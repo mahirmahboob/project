@@ -1,0 +1,53 @@
+{
+    "articles": [
+      {
+        "id": 1,
+        "title": "The Technology Evolution",
+        "link": "https://www.sandiegouniontribune.com/news/public-safety/story/2020-09-09/mayor-orders-san-diegos-smart-streetlights-turned-off-until-surveillance-ordinance-in-place",
+        "user": "John Doe",
+        "upvotes": 10
+      },
+      {
+        "id": 2,
+        "title": "Fintech on the rise",
+        "link": "https://about.fb.com/news/2020/09/introducing-facebook-campus/",
+        "user": "John Doea",
+        "upvotes": 14
+      },
+      {
+        "id": 3,
+        "title": "Oracle tries to buy Snapchat",
+        "link": "https://www.linkedin.com/company/tyltgo/jobs/",
+        "user": "John Dos",
+        "upvotes": 100
+      },
+      {
+        "id": 4,
+        "title": "Industry expert claims wage gap gradually closing up in tech",
+        "link": "https://solitaired.com/email-registration-is-dead",
+        "user": "John Doeaa",
+        "upvotes": 62
+      },
+      {
+        "id": 5,
+        "title": "CEO of Alare Tech Group claims the future is in AI",
+        "link": "https://lists.gnu.org/archive/html/emacs-devel/2020-09/msg00286.html",
+        "user": "John Doeee",
+        "upvotes": 30
+      },
+      {
+        "id": 6,
+        "title": "Samsung release new phone",
+        "link": "https://www.nybooks.com/daily/2020/09/04/the-revolutionary-thoreau/",
+        "user": "John Doeop",
+        "upvotes": 99
+      },
+      {
+        "id": 7,
+        "title": "Technology aims to revolutionize the food industry",
+        "link": "https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html",
+        "user": "John Doeau",
+        "upvotes": 999
+      }
+    ]
+  }

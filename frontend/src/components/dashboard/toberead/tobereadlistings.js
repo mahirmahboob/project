@@ -31,6 +31,7 @@ const ToBeReadList = (toberead) => {
               <Button onClick={() => handleDelete(data.book_name)}>
                 Delete Book
               </Button>
+              
               {/* <Button onClick={() => handleUpvote(data.upvote)}>Upvote</Button> */}
           </div>
         );

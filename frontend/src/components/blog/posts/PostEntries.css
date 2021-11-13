@@ -1,0 +1,8 @@
+.rowCard {
+  border: 5px solid white;
+  width: 100%;
+}
+
+.article-link {
+  text-decoration: none !important;
+}
