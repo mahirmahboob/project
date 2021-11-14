@@ -41,6 +41,10 @@ class AddEntry extends Component {
             {
               alert("could not add book to your bookshelf")
             }
+            else if (response.status === 407) 
+            {
+              alert("You already read the book, its in your history table")
+            }
             else if (response.status === 201)
             {
               alert("Succesfull adding the book")

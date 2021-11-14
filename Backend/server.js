@@ -576,6 +576,27 @@ app.get('/rest/toberead/:usr', (req, res) => {
 
 })
 
+//this is the history
+//this is the endpoint that will display the history shelf
+// I have not tested this end-point yet
+app.get('/rest/historytable/:usr', (req, res) => {
+    const user = (req.params.usr);
+    //console.log(genre_given_by_user);
+    connection.query('SELECT * FROM user_book_history WHERE username= ? ', user, function (err, result) {
+
+        if (err) {
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            //console.log("it's working");
+            res.status(201).send(result);
+        }
+
+    })
+
+})
 
 /* This endpoint will allow you to add a book to the user bookshelf.  I should look at this more carefully.*/
 app.post('/rest/submit/:usr', (req, res) => {
@@ -596,10 +617,21 @@ app.post('/rest/submit/:usr', (req, res) => {
        
         else
         {
-            
-            connection.query('select * from book_information where book_name = ?', [user_book_name], function (err, book_info) 
-            { 
-                
+          connection.query('select * from user_book_history where username = ? AND book_name = ?', [username, user_book_name], function (err, some_res) {
+            if (err)
+            {
+              res.send({err:err});
+            }
+
+            else if (some_res.length >= 1)
+            {
+            res.status(407).send('You already read that book, its in your history table');
+            }
+
+            else
+            {
+                //console.log('add the book to the database')
+                connection.query('select * from book_information where book_name = ?', [user_book_name], function (err, book_info) { 
                 if (err)
                 {
                     res.send({err:err});
@@ -621,18 +653,17 @@ app.post('/rest/submit/:usr', (req, res) => {
                         }
                     })
                 }
+                }) // this the closing bracket for the last connection query
+                
+            } // this the closing bracket for the inside else statement
 
-            })  
-        }
-
+        }) // this is the closing bracket for 'select * from user_book_history where username = ? and book_name = ?
+        } // this is the closing bracket for else statement
     })
-})
-
-
+}) // This is the last bracket
 
 
 //This is the endpoint that will delete  book from the user bookshelf
-
 app.delete('/rest/delete/:usr', (req, res) => {
     
     nameofthebook = req.body.title;
@@ -676,6 +707,73 @@ app.delete('/rest/delete/:usr', (req, res) => {
 
 })
 
+//This enndpoints needs some work
+//This is the endpoint that will add a book to user book history shelf and also, it will delete the same book from the user book_mark
+app.post(`/rest/add/:usr`, (req, res) => {
+
+    const username = (req.params.usr);
+    const user_book_name = req.body.title;
+    console.log(username);
+    console.log(user_book_name);
+
+    connection.query('select book_name from user_book_history where username = ? AND book_name = ?', [username, user_book_name], function (err, result) {
+        
+        if (err) 
+        {
+            console.log("we are here 1")
+            res.send({err:err});
+        }
+        
+
+        else if (result.length === 1) 
+        {
+            console.log("we are here 2")
+            res.status(406).send('That book already exist in the user history shelf');
+        }
+       
+        else
+        {
+            console.log("we are here 3")
+            connection.query('select * from book_information where book_name = ?', [user_book_name], function (err, book_info) 
+            { 
+                if (err)
+                {
+                    res.send({err:err});
+                }
+                else if (book_info.length === 1)
+                {
+                    connection.query('insert into user_book_history set ?', {username: username, book_name: book_info[0].book_name, genre: book_info[0].genre, author: book_info[0].author, rating: book_info[0].rating, age_range: book_info[0].age_range, maximum_pages: book_info[0].maximum_pages, publication_date: book_info[0].publication_date, trigger_warning: book_info[0].trigger_warning, best_seller: book_info[0].best_seller, series: book_info[0].series, PictureLink: book_info[0].PictureLink, LinkToAmazon: book_info[0].LinkToAmazon, Synopsis: book_info[0].Synopsis}, function (err, resss) {
+                        if (err) 
+                        {
+                            
+                            res.send({err:err})
+                        }
+
+                        else
+                        {
+                            connection.query('DELETE FROM user_bookmark WHERE username = ? AND book_name = ?', [username, user_book_name], (err, final_res) => {
+                                if (err)
+                                {
+                                    res.send({err:err})
+                                }
+
+                                else
+                                {
+                                    res.status(201).send ("we added books to the history table")
+                                }
+
+                            })
+
+                        }
+                    })
+                }
+
+            }) 
+        }
+
+    })
+})
+
 /*
 Copied this code from stackoverflow...
 Link------https://stackoverflow.com/questions/37385833/node-js-mysql-database-disconnect
@@ -704,32 +802,3 @@ handleDisconnect();
 
 app.listen(5000)
 
-
-/*
-
- import React, { Component } from 'react'
-
- class userdashboard extends Component {
-    constructor(props) {
-         super(props);
-         this.state = {
-        } 
-     }
-
-
-    render() {
-    
-
-        const { state } = this.props.location
-        //console.log(state.username);
-     return ( 
-         <div>
-             <h1> Welcome {state.state}</h1>
-        </div> 
-     )
-    }
-}
-
-
- export default userdashboard;
-*/

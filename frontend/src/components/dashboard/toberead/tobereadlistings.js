@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteEntry from "./deletetobereadentry";
+import FinishReading from "./userbookhistory"
 import { Button } from "react-bootstrap";
 import { render } from "@testing-library/react";
 // import Upvote from "../../upvote";
@@ -13,6 +14,15 @@ const ToBeReadList = (toberead) => {
       </div>
     );
   }
+
+    function handleFinishReading(title) {
+    render(
+      <div>
+        <FinishReading title={title} />
+      </div>
+    );
+  }
+
 
   // function handleUpvote(upvote) {
   //   render(
@@ -31,7 +41,7 @@ const ToBeReadList = (toberead) => {
               <Button onClick={() => handleDelete(data.book_name)}>
                 Delete Book
               </Button>
-              
+              {<Button onClick={() => handleFinishReading(data.book_name)}>Finish Reading</Button>}
               {/* <Button onClick={() => handleUpvote(data.upvote)}>Upvote</Button> */}
           </div>
         );
