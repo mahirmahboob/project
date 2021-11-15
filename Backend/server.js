@@ -620,12 +620,15 @@ app.post('/rest/submit/:usr', (req, res) => {
           connection.query('select * from user_book_history where username = ? AND book_name = ?', [username, user_book_name], function (err, some_res) {
             if (err)
             {
+              //console.log("we have a problem here")
               res.send({err:err});
             }
 
-            else if (some_res.length >= 1)
-            {
-            res.status(407).send('You already read that book, its in your history table');
+            else if (some_res.length === 1)
+            {   
+            
+            //console.log("You already read that book, its in your history table");
+            res.status(400).send('You already read that book, its in your history table');
             }
 
             else
@@ -642,7 +645,7 @@ app.post('/rest/submit/:usr', (req, res) => {
                         if (err) 
                         {
                             
-                            res.status(400).send("could not add book to the user bookshelf");
+                            res.send({err:err});
                         }
 
                         else
@@ -773,6 +776,54 @@ app.post(`/rest/add/:usr`, (req, res) => {
 
     })
 })
+
+
+// This endpoint will allow you to delete a book from the user history table
+app.delete('/rest/deletehistory/:usr', (req, res) => {
+    
+    nameofthebook = req.body.title;
+    nameoftheuser = req.params.usr;
+
+    console.log(nameofthebook);
+    console.log(nameoftheuser);
+
+    connection.query('select * from user_book_history where username = ? AND book_name = ?', [nameoftheuser, nameofthebook], (err, book) => {
+        if (err)
+        {
+            //console.log('we have an error here');
+            res.send(err);
+        }
+
+        else if(book.length === 0)
+        {
+            //console.log('we have an error here 2 ');
+            res.status(404).send("This book does not exist")
+        }
+
+        // if it goes to the else statement that means this book exist, so all we have to do is delete.
+        else
+        {
+            connection.query('Delete from user_book_history where username = ? AND book_name = ?', [nameoftheuser, nameofthebook], (error, deleteres) => {
+                if (error)
+                {
+                    //console.log('we have an error here 2 ');
+                    res.send(error)
+                }
+
+                else
+                {
+                    //console.log('Success');
+                    res.status(201).send("We succesfully deleted")
+                }
+            })
+        }
+
+    })
+
+})
+
+
+
 
 /*
 Copied this code from stackoverflow...

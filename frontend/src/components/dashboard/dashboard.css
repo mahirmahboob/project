@@ -14,9 +14,12 @@
   background: rgb(75, 101, 135);
 }
 
+/*
+I (mahir) only changes the height
+*/
 .two {
   margin-left: 1px;
   width: 900px;
-  height: 700px;
+  height: 1400px;
   background: rgb(243, 245, 241);
 }

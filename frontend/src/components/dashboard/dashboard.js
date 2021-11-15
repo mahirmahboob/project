@@ -7,6 +7,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import Search from 'react-search'
 import ToBeRead from "./toberead/toberead";
 import AddEntry from "./toberead/addtobereadentry";
+import GetHistoryTable from "./toberead/gethistorytable";
 import "./dashboard.css";
 import {useParams} from "react-router-dom";
 import { PropTypes } from 'react'
@@ -65,6 +66,9 @@ let userDetails = JSON.parse(localStorage.getItem('current_user'));
                 <div class="two">
                     <AddEntry/>
                     <ToBeRead/>
+                    <h4> Your read list</h4>
+                    <GetHistoryTable/>
+                    
                 </div>
             </div>
         </div>

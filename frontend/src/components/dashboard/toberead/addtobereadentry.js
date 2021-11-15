@@ -16,7 +16,7 @@ class AddEntry extends Component {
 
    update_title(newdata) {
       this.setState({ title: newdata}, ()=>{
-      console.log(this.state.title);
+      //console.log(this.state.title);
     })
   }
 
@@ -34,17 +34,16 @@ class AddEntry extends Component {
       })
     }).then(response => {
 
-            if (response.status === 406) {
+            if (response.status === 406) 
+            {
             alert("That book already exist in your bookshelf");
             }
+
             else if (response.status === 400) 
             {
-              alert("could not add book to your bookshelf")
+              alert("You already read that book, its in your history table")
             }
-            else if (response.status === 407) 
-            {
-              alert("You already read the book, its in your history table")
-            }
+
             else if (response.status === 201)
             {
               alert("Succesfull adding the book")
