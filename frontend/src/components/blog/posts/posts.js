@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PostEntries from "./PostEntries";
 
-const url = "localhost:6800/posts/"; 
+const url = "localhost:5000/posts"; 
 
 class Posts extends Component {
   constructor() {
@@ -9,7 +9,7 @@ class Posts extends Component {
     this.state = { posts: "" };
   }
   componentDidMount() {
-    fetch("http://localhost:6800/posts", { method: "GET" })
+    fetch("http://localhost:5000/posts", { method: "GET" })
       .then((response) => response.json())
       .then((data) => { this.setState({ posts: data }); });
   }

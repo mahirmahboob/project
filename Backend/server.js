@@ -17,6 +17,7 @@ const app = express();
 const flash = require('express-flash');
 const { Console } = require('console');
 const bodyParser = require('body-parser');
+const { title } = require('process');
 
 
 //Middleware 
@@ -511,11 +512,75 @@ app.get('/userdashboard/:user', function(req, res) {
 
 //After the MVP presentation--------------------------------------------------------------------------------------------------------------
 
-//When a user post a  comment in the blog section, this API will get called.
-app.post('/postacomment', (req, res) => {
-    const new_comment = req.body.commentBody;
-    console.log(req.body.commentBody);
-    connection.query('insert into blog VALUES (?)', new_comment, function (err, result) {
+
+
+
+
+app.get('/toptenbooks', (req, res) => {
+
+        connection.query('select * from book_information order by rating LIMIT 10', function (err, result) {
+
+        if (err) {
+            //console.log("problem with top 10 books");
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            //console.log("Great!! we get top 10 books from the backend");
+            res.status(201).send(result);
+        }
+
+    })
+    
+})
+
+//This endpoint will get all the post from the database
+app.get('/posts', (req, res) => {
+        connection.query('select * from blogtable', function (err, result) {
+
+        if (err) {
+            console.log("We are not table to get the post from the backend");
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            console.log("Great!! we get all the post from the backend");
+            res.status(201).send(result);
+        }
+
+    })
+})
+
+//This endpoint will get all the comments for a specific title
+app.get('/comments/:title', (req, res) => {
+    const title = (req.params.title);
+
+        connection.query('select * from comments where title = ?', title, function (err, result) {
+
+        if (err) {
+            console.log("we are not able to get comments from the database");
+            res.status(404).send('Not working');
+        }
+
+        else {
+            //console.log(response);
+            console.log("we are succesfull at getting the comments from the database");
+            res.status(201).send(result);
+        }
+
+    })
+
+
+})
+
+app.post('/rest/submit/comment', (req, res) => {
+    const username = req.body.user;
+    const postid = req.body.post_title;
+    const new_comment = req.body.text;
+
+    connection.query('insert into comments set ?', {username:username, title:postid, Comment: new_comment}, function (err, result) {
 
         if (err) {
             console.log("new comment is not being added to the database");
@@ -533,25 +598,7 @@ app.post('/postacomment', (req, res) => {
 })
 
 
-//When user clicks on the blog comment section, then we will use this API to display all the comments
 
-app.get('/getallthecomments', (req, res) => {
-    connection.query('select comment from blog', function (err, result) {
-
-        if (err) {
-            console.log("we are having problem sending all the comments to the frontend")
-            res.status(404).send('Not working');
-        }
-
-        else {
-            //console.log(response);
-            console.log("we are sending all the comments to the frontend")
-            res.status(201).send(result);
-        }
-
-    })
-    
-})
 
 
 //Working

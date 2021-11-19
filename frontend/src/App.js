@@ -13,7 +13,7 @@ import SurpriseMeRecs from "./components/surpriseMe/surpriseMe";
 import dashboard from "./components/dashboard/dashboard";
 import forgot from "./components/forgot";
 import forgotusername from "./components/forgotusername";
-import blog from "./components/blog/blog";
+import blog from "./components/blog/blogmain.js";
 import AboutUs from "./components/AboutUs/aboutus.js";
 import { PropTypes } from 'react'
 

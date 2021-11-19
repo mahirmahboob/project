@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import PostComment from "./PostComment";
+///
 
 const CommentEntries = ({commentEntries, postTitle}) => {
 
@@ -10,10 +11,8 @@ const CommentEntries = ({commentEntries, postTitle}) => {
         return (
           <div>
             <div>
-              {data.user}
-            </div>
-            <div>
-              {data.text}
+              {data.username}
+              {data.comment}
             </div>
           </div>
         );

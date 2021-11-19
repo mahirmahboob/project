@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 
-const url = "/rest/submit/comment";
 
 class PostComment extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       user: "",
       text: "",
-      post_title: "",
     };
   }
 
@@ -17,27 +14,35 @@ class PostComment extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    var formData = new FormData();
-    formData.append("user", this.state.user);
-    formData.append("text", this.state.text);
-    formData.append("post_title", this.props.postTitle);
+      submitHandler = (e) => {
+        e.preventDefault();
 
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        response.json();
-      })
+        fetch('/rest/submit/comment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: this.state.user,
+                text: this.state.text,
+                post_title: this.props.postTitle,
+            })
+        }).then(response => {
 
-      .catch((error) => {
-        console.log("Error: ", error);
-      })
-      .then((response) => console.log("Success: ", JSON.stringify(response)));
-  };
+            if (response.status === 404) {
+            alert("Something went wrong");
+            
+            }
+            else if (response.status === 201)
+            {
+              alert("Success");
+            }
+            })
+           .catch(function(error) {
+            
+                alert(error);
+            });
+        }
 
   render() {
     const { user, text } = this.state;

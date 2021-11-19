@@ -15,6 +15,7 @@ import { PropTypes } from 'react'
 const sideBySide ={
 
 }
+////
 
 
 const Dashboard = () => {
@@ -22,6 +23,21 @@ const Dashboard = () => {
 let userDetails = JSON.parse(localStorage.getItem('current_user'));
 //console.log(userDetails);
 
+
+
+    useEffect( () => {
+        fetchItems();
+    }, []);
+
+    const [rowData, setItems] = useState([]);
+
+    const fetchItems = async () => {
+        const data = await fetch('/toptenbooks');
+        const rowData = await data.json();
+        setItems(rowData);
+    };
+
+    /*
     const rowData = [
         {title: "Love Life", author: "Amy Azelia"},
         {title: "The Secret Society", author: "Adrien Potter"},
@@ -34,6 +50,7 @@ let userDetails = JSON.parse(localStorage.getItem('current_user'));
         {title: "Love Lifes", author: "Amy Azelia"},
         {title: "The Secret Societies", author: "Adrien Potter"},
     ];
+    */
    
     const [gridApi, setGridApi] = useState(null);
     const [gridColumApi, setGridColumnApi] = useState(null);
@@ -58,7 +75,7 @@ let userDetails = JSON.parse(localStorage.getItem('current_user'));
                             rowData={rowData}
                             onGridReady={onGridReady}
                             >
-                            <AgGridColumn field="title"></AgGridColumn>
+                            <AgGridColumn field="book_name"></AgGridColumn>
                             <AgGridColumn field="author"></AgGridColumn>
                         </AgGridReact>
                     </div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CommentEntries from "./CommentEntries";
 
-const url = "localhost:6800/comments/"; 
 
 class Comments extends Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class Comments extends Component {
 
   componentDidMount() {
     var title = this.props.title;
-    fetch("http://localhost:6800/comments/" + title, { method: "GET" })
+    fetch(`http://localhost:5000/comments/${title}`, { method: "GET" })
       .then((response) => response.json())
       .then((data) => { this.setState({ comments: data }); });
   }

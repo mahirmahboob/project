@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Posts from "./posts/posts";
 
+//
+
 class BlogMain extends Component {
   render() {
     return (
