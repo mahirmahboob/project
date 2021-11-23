@@ -23,3 +23,18 @@ I (mahir) only changes the height
   height: 1400px;
   background: rgb(243, 245, 241);
 }
+
+.thumbs {
+  display: flex;
+  width: 38%;
+  justify-content: space-between;
+  color: #3b5998;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.thumbs > span {
+  font-size: 18px;
+  color: black;
+  margin-left: 5px;
+}

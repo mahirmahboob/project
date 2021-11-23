@@ -45,8 +45,8 @@ const submitStyle = {
 };
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
         this.state = {
             username: "",
@@ -63,6 +63,7 @@ class Login extends Component {
 
     handleSubmitLogin = (e) => {
         e.preventDefault();
+    
 
         fetch('/rest/login', {
             method: 'POST',
@@ -86,14 +87,15 @@ class Login extends Component {
                 this.props.handleLogin();
                 const users = this.state.username;
                 localStorage.setItem('current_user', JSON.stringify(users))
-                //window.location.href = `http://localhost:3000/dashboard/${this.state.username}`;
-                this.props.history.push(`/dashboard/${this.state.username}`, {state: this.state.username});
+                window.location.href = `http://localhost:3000/dashboard/${this.state.username}`;
+                //this.props.history.push(`/dashboard/${this.state.username}`, {state: this.state.username});
             }
             })
            .catch(function(error) {
             
                 alert(error);
             });
+        
         }
 
     render() {
@@ -147,28 +149,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-// import React, { Component } from "react";
-
-// // const url = '/rest/login'
-
-// class Login extends Component {
-//     constructor() {
-//         super();
-//         this.state = {
-           
-//         }
-//     }
-    
-
-//     render() {
-     
-//      return (  
-//         <div>
-//          Login
-//         </div>
-//     );
-//     }
-// }
-
-// export default Login;

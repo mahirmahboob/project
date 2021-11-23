@@ -13,7 +13,7 @@ import SurpriseMeRecs from "./components/surpriseMe/surpriseMe";
 import dashboard from "./components/dashboard/dashboard";
 import forgot from "./components/forgot";
 import forgotusername from "./components/forgotusername";
-import blog from "./components/blog/blogmain.js";
+import blog from "./components/blog/blogmain";
 import AboutUs from "./components/AboutUs/aboutus.js";
 import { PropTypes } from 'react'
 
@@ -24,6 +24,15 @@ class App extends Component {
       isLoggedIn: false,
     };
     this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidMount(){
+    const userfromstorage=localStorage.getItem("current_user");
+    if(userfromstorage){
+      this.setState({
+        isLoggedIn:true
+      })
+    }
   }
 
   handleLogin() {
@@ -38,7 +47,7 @@ class App extends Component {
     this.setState({
       isLoggedIn: false,
     });
-    localStorage.clear()
+    localStorage.removeItem("current_user");
   }
 
   render() {
@@ -71,7 +80,6 @@ class App extends Component {
                 )}
               />
               <Route path="/home" component={Homepage} />
-              <Route path="/login" component={Login} />
               <Route path="/searchdir" component={SearchPage} />
               <Route path="/recGenre" component={GenreRecs} />
               <Route path="/recQuiz" component={QuizRecs} />
@@ -92,18 +100,3 @@ class App extends Component {
 }
 
 export default App;
-
-// import './App.css';
-// import { MainContainer } from './mainContainer';
-// import Navbar from './components/navbar/navbar';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Navbar/>
-//       <MainContainer/>
-//     </div>
-//   );
-// }
-
-// export default App;

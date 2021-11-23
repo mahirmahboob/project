@@ -32,6 +32,7 @@ class FinishReading extends Component {
             else if (response.status === 201)
             {
               alert("We succesfully added this book to your history table")
+              window.location.reload(false);
             }
             })
            .catch(function(error) {

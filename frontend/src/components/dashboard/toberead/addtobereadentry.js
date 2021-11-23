@@ -47,6 +47,7 @@ class AddEntry extends Component {
             else if (response.status === 201)
             {
               alert("Succesfull adding the book")
+              window.location.reload(false);
             }
             })
            .catch(function(error) {

@@ -31,6 +31,7 @@ class DeleteEntry extends Component {
             else if (response.status === 201)
             {
               alert("We succesfully deleted")
+              window.location.reload(false);
             }
             })
            .catch(function(error) {
