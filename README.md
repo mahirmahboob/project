@@ -11,7 +11,7 @@ We have Three books recommending algorithm
 
 In this project, we have more features. We have a blog where users can post comments. Moreover, each user can signup for an account. Each user can have a personalized dashboard. They can add/remove books to/from their bookshelf. In addition, we have a history table where users can view what books they have already read. 
 
-M group members and I wanted our project to have visual effects to have great usage satisfaction from the user. 
+My group members and I wanted our project to have visual effects to have great usage satisfaction from the user. 
 
 I will show the steps to download this project so that you can see the details of our projects
 Here are the steps.
