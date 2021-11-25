@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(require('cookie-parser')()); // i can do this like const cookieParser = require('cookie-parser'); Then, app.use(cookie-parser())
 app.use(cors());
 app.use(flash());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 //passport.js
 app.use(passport.initialize());
 app.use(passport.session());
@@ -719,8 +719,7 @@ app.delete('/rest/delete/:usr', (req, res) => {
     nameofthebook = req.body.title;
     nameoftheuser = req.params.usr;
 
-    console.log(nameofthebook);
-    console.log(nameoftheuser);
+  
 
     connection.query('select * from user_bookmark where username = ? AND book_name = ?', [nameoftheuser, nameofthebook], (err, book) => {
         if (err)
@@ -871,8 +870,55 @@ app.delete('/rest/deletehistory/:usr', (req, res) => {
 
 
 
+//We need to make an endpoint that will help the user to LIKE/DISLIKE A BOOK (upvote/downvote)
+app.put('/books/:book_name', (req, res) => {
+
+    const userlikeordislike = req.body.type;
+    const book = req.params.book_name;
+    var rating_value;
+
+
+    connection.query('select rating from book_information where book_name = ?', [book], function (err, result) {
+
+        if (err) {
+            
+            res.status(404).send('We are unable to get the book from the backend');
+        }
+        else if (result.length === 0)
+        {
+            
+            res.status(405).send('We dont have a book with that name');
+        }
+
+        else {
+            
+            rating_value = result[0].rating
+            if (userlikeordislike === 'like')
+            {
+                rating_value = rating_value + 1;
+            }
+
+            else
+            {
+                rating_value = rating_value - 1;
+            }
+            //console.log(rating_value);
+            //'update user_table Set password = ? where username = ?', [hashednewpassword, username],
+
+            connection.query('update book_information Set rating = ? where book_name = ?', [rating_value, book])
+            connection.query('update user_bookmark Set rating = ? where book_name = ?', [rating_value, book])
+            connection.query('update user_book_history Set rating = ? where book_name = ?', [rating_value, book])
+            res.status(201).send("sucess")
+        } // else statement for the main query
+
+    }) //end of main query
+
+}) //end of the end-point
+
+
 
 /*
+
 Copied this code from stackoverflow...
 Link------https://stackoverflow.com/questions/37385833/node-js-mysql-database-disconnect
 The reason why we are adding this part is because we may lose connection with mysql. we want to restart the connection.

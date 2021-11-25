@@ -12,8 +12,8 @@ const usr = JSON.parse(localStorage.getItem('current_user'));
 const url = `/rest/historytable/${usr}`
 
 class GetHistoryTable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       gethistorytable: [],
     };
@@ -62,11 +62,11 @@ class GetHistoryTable extends Component {
                       <p>
                         by {rec.author}
                       </p>
-                      <div className="thumbs">
-                      <i class="fas fa-thumbs-up"></i>
-                      <i class="fas fa-thumbs-down"></i>
-                      <span>{rec.rating} likes</span>
-                      </div>
+                        <div className="thumbs">
+                            <i onClick={() => this.props.updateLikes(rec.book_name, 'like')} class="fas fa-thumbs-up"></i>
+                            <i onClick={() => this.props.updateLikes(rec.book_name, 'dislike')} class="fas fa-thumbs-down"></i>
+                            <span>{rec.rating} likes</span>
+                        </div>
                       <p>
                         {rec.Synopsis}
                       </p>

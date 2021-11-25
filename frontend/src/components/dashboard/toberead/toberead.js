@@ -12,8 +12,8 @@ const usr = JSON.parse(localStorage.getItem('current_user'));
 const url = `/rest/toberead/${usr}`;
 
 class ToBeRead extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       toberead: [],
     };
@@ -28,6 +28,21 @@ class ToBeRead extends Component {
         });
       });
   }
+
+  componentDidUpdate(prevProps,prevState){
+    if(prevProps.updateSuccess !== this.props.updateSuccess )
+    {
+      fetch(url, { method: "GET" })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          toberead: data,
+        });
+      });
+    }
+  }
+
+  
   //HTMLToolTip from the mui documentation
   HtmlTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -60,9 +75,9 @@ class ToBeRead extends Component {
                         by {rec.author}
                       </p>
                       <div className="thumbs">
-                      <i class="fas fa-thumbs-up"></i>
-                      <i class="fas fa-thumbs-down"></i>
-                      <span>{rec.rating} likes</span>
+                        <i onClick={()=>this.props.updateLikes(rec.book_name, 'like')} class="fas fa-thumbs-up"></i>
+                        <i onClick={()=>this.props.updateLikes(rec.book_name, 'dislike')} class="fas fa-thumbs-down"></i>
+                        <span>{rec.rating} likes</span>
                       </div>
                       <p>
                         {rec.Synopsis}
