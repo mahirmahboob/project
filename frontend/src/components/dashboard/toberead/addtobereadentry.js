@@ -70,7 +70,7 @@ class AddEntry extends Component {
             fontSize: '25px'
           }}
         >
-          My Bookshelf
+          My Bookshelves
         </div>
         <br />
         <form onSubmit={this.submitHandler}>

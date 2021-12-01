@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Footer } from "./footer";
+
 
 const appStyle = {
     height: '250px',
@@ -132,6 +134,12 @@ class forgotusername extends Component {
             </div>
         </div>
         </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
         </div>
         );
     }

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Footer } from "./footer";
+
 
 
 const appStyle = {
@@ -166,6 +168,16 @@ class forgot extends Component {
             </div>
         </div>
         </div>
+                
+                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
         </div>
         );
     }

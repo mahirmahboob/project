@@ -1,0 +1,10 @@
+.second_container {
+  flex-wrap: wrap;
+  display: flex;
+  align-content: center;
+  margin-left: 500px;
+}
+
+.nytbookscolumn {
+  background-color: greenyellow;
+}

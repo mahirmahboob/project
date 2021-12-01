@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { Footer } from "../footer";
+
 
 // const url = "http://localhost:3000/search";
 const SearchPage = () => {
@@ -60,8 +62,20 @@ const SearchPage = () => {
 
     const [gridApi, setGridApi] = useState(null);
     const [gridColumApi, setGridColumnApi] = useState(null);
-    const searchDivStyle={backgroundColor:"#dedede",padding:10}
-    const searchStyle={width:"40%",padding:"10px 20px",borderRadius:0,outline:0,fontSize:"100%"}
+
+
+    const searchDivStyle={
+        backgroundColor:"#dedede",
+        paddingTop:'20px',
+        paddingBottom:'20px',
+        borderRadius:'0px'
+    }
+
+    const searchStyle={
+        width:"50%",
+        padding:"10px 20px"
+    }
+
     function onGridReady(params) {
         setGridApi(params.api);
         setGridColumnApi(params.columnApi);
@@ -72,11 +86,12 @@ const SearchPage = () => {
     
     return (
         <div>
-            <div style={{padding:10, fontSize:40}}>Search our directory!</div>
+            <div style={{padding:20, fontSize:40, fontFamily:"Lucida Console"}}>Search our Directory!</div>
             {/* To Do: add filters and sortablilty */}
             <div style={searchDivStyle}>
-                <input type="search" style={searchStyle} onChange={onFilterTextChange} placeholder="search here..."/>
+                <input type="search" style={searchStyle} onChange={onFilterTextChange} placeholder="type your search here..."/>
             </div>
+
             <div className="ag-theme-alpine" style={{paddingLeft: 50, height: 600, width: 1400}}>
                 <AgGridReact
                     rowData={rowData}
@@ -92,6 +107,12 @@ const SearchPage = () => {
                     <AgGridColumn field="trigger_warning" filter="agTextColumnFilter"></AgGridColumn>
                 </AgGridReact>
             </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
         </div>
     );
 };

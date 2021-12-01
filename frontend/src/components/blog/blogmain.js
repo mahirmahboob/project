@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Posts from "./posts/posts";
+import { Footer } from "../footer";
+import Nyttopbooks from "../NYTbooks/nytbooks"
 
 class BlogMain extends Component {
   render() {
@@ -113,6 +115,18 @@ class BlogMain extends Component {
             </div>
         
         <Posts />
+        <div> 
+            <h2>Here is top Three best selling fiction books from NYT</h2>
+        </div>
+        <div> 
+        <Nyttopbooks/>
+        </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
       </div>
     );
   }

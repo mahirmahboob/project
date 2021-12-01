@@ -1,5 +1,7 @@
 import React from "react";
 import './surpriseMe.css';
+import { Footer } from "../footer";
+
 export default class Testfetch extends React.Component{
     state = {
         loading:true,
@@ -85,6 +87,12 @@ export default class Testfetch extends React.Component{
                         <div class="text-center"> Synopsis: {this.state.book.synopsis}</div> */}
                     </div>
                 )}
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
                 
             </div>  
             </body>

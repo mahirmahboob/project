@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { PropTypes } from 'react'
+import { Footer } from "./footer";
+
 // import { Link } from "react-router-dom";
 
 // const url = '/rest/login'
@@ -143,6 +145,12 @@ class Login extends Component {
             </div>
         </div>
         </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
         </div>
         );
     }

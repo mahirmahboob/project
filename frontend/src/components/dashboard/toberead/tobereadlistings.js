@@ -34,18 +34,16 @@ const ToBeReadList = (toberead) => {
 
   const renderList = ({ toberead }) => {
     if (toberead) {
-      return toberead.map((data) => {
+      
         return (
           <div className="bookshelfentry"> 
-              Title: {data.book_name}
-              <Button onClick={() => handleDelete(data.book_name)}>
+            <span> <Button onClick={() => handleDelete(toberead)}>
                 Delete Book
-              </Button>
-              {<Button onClick={() => handleFinishReading(data.book_name)}>Finish Reading</Button>}
+               </Button> </span>
+              <span>{<Button onClick={() => handleFinishReading(toberead)}>Finish Reading</Button>} </span>
               {/* <Button onClick={() => handleUpvote(data.upvote)}>Upvote</Button> */}
           </div>
         );
-      });
     }
   };
 

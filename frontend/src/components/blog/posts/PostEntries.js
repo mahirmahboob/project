@@ -15,7 +15,8 @@ const PostEntries = (postEntries) => {
           <div style={{ marginLeft: '10%', marginTop: '40px', width: '80%', height: '35%', boxShadow: '5px 5px 5px 2px #bebebe', backgroundColor:"#ebd3b9"}}>
             <Box color="black" bgcolor="#ebd3b9" p={8}>
             <div>
-                {data.title}
+                <h3>{data.title} by {data.author}</h3>
+                <div>{data.description}</div>
                 <div>
                 <a href={data.link}>Link</a>
                 </div>

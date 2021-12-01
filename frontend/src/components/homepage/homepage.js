@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./homepage.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-
+import { Footer } from "../footer";
 
 // const url = '/rest/login'
 
@@ -56,7 +56,7 @@ class Homepage extends Component {
                     Hey, welcome to Bookmarked, a home for book lovers all across the globe.
                     If you’re itching for something to read but can’t figure out what,
                     come take a look around the site to see how we can help.
-        </p>
+                    </p>
                 </div>
 
                 <div className="Genre">
@@ -149,23 +149,13 @@ class Homepage extends Component {
                     </div>
                 </div>
 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
 
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-
-                <div>
-                    <div style={{ left: 0 }}>Bookmarked &#169; | 2021  </div>
-
-                    <div className="Footer">
-                        <img className="fb footerimg" alt="fb logo" src="./img/fb.png" />
-                        <img className="tw footerimg" alt="twitter logo" src="./img/twitter.png" />
-                        <img className="insta footerimg" alt="instagram logo" src="./img/Insta.png" />
-                    </div>
-
-                </div>
+                <Footer/>
 
             </div>
 

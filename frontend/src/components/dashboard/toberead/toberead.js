@@ -82,6 +82,9 @@ class ToBeRead extends Component {
                       <p>
                         {rec.Synopsis}
                       </p>
+                      <p>
+                        <ToBeReadList toberead={rec.book_name} />
+                      </p>
                     </>
                   } placement="right">
                     <img src={rec.PictureLink} height={300} witdth={210} />
@@ -90,7 +93,6 @@ class ToBeRead extends Component {
               ))
             }
           </div>
-          <ToBeReadList toberead={this.state.toberead} />
         </div>
       </div>
     );
@@ -98,3 +100,4 @@ class ToBeRead extends Component {
 }
 
 export default ToBeRead;
+///<ToBeReadList toberead={this.state.toberead} />

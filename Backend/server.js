@@ -535,7 +535,7 @@ app.get('/toptenbooks', (req, res) => {
     
 })
 
-//This endpoint will get all the post from the database
+//This endpoint will get all the post from the database.
 app.get('/posts', (req, res) => {
         connection.query('select * from blogtable', function (err, result) {
 
@@ -595,6 +595,33 @@ app.post('/rest/submit/comment', (req, res) => {
 
     })
     
+})
+
+
+
+// this endpoint will add a post to the backend
+app.post('/rest/submit/userpost', (req, res) => {
+
+    console.log("we are here in the add post")
+    
+    const article_title = req.body.title;
+    const image_link = req.body.imgLink;
+    const author = req.body.author;
+    const description = req.body.body;
+    const articlelink = req.body.link;
+
+    connection.query('insert into blogtable set ?', {title: article_title, link: articlelink, description: description, author:author, articleimagelink: image_link}, function (error, success) {
+        if (error)
+        {
+            res.status(404).send("failed. We can not add a user post to the database")
+        }
+
+        else
+        {
+            console.log("we are sucessful at adding a post to the database")
+            res.status(201).send("We are sucessfull")
+        }
+    })
 })
 
 

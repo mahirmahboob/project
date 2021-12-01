@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PostEntries from "./PostEntries";
+import AddEntry from "./AddEntry";
 
 const url = "localhost:5000/posts"; 
 
@@ -18,6 +19,8 @@ class Posts extends Component {
       <div>
         Blog Posts
         <PostEntries postEntries={this.state.posts} />
+        <br/>
+        <AddEntry/>
       </div>
     );
   }

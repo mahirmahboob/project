@@ -107,7 +107,7 @@ const Dashboard = () => {
             border: '1px solid #dadde9',
         },
     }));
-
+//
 
 
     return (
@@ -115,7 +115,7 @@ const Dashboard = () => {
         <div class="container">
             <div class="one">
                 <div style={{ paddingBottom: 10, textAlign: 'center', fontSize: 20, fontFamily: 'Courier New' }}> Top Ten!</div>
-                <div className="ag-theme-alpine" style={{ paddingLeft: "5px", width: 400 }}>
+                <div className="ag-theme-alpine" style={{ paddingLeft: "5px", width: 400}}>
                     {items.length > 0 && items.map((item) => {
                         return (
                             <HtmlTooltip title={
@@ -148,7 +148,17 @@ const Dashboard = () => {
             <div class="two">
                 <AddEntry />
                 <ToBeRead updateSuccess={updateSuccess} updateLikes={updateLikes} />
-                <h4> Your read list</h4>
+                    <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontFamily: 'Courier New',
+                        fontSize: '25px'
+                    }}
+                    >
+                    Your Reading Log
+                    </div>
                 <GetHistoryTable updateSuccess={updateSuccess} updateLikes={updateLikes}/>
 
             </div>

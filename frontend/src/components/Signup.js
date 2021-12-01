@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Footer } from "./footer";
+
+
 
 // const url = '/rest/signup'
 const appStyle = {
@@ -184,6 +187,14 @@ class Signup extends Component {
                     </form>
                 </div>
             </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
         </div>
         );
     }

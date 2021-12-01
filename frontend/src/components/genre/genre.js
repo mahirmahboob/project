@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Button from 'react-bootstrap/Button';
 import "./genre.css"
 import books from "../../testData/data"
+import { Footer } from "../footer";
+
 
 class GenreRecs extends Component {
     constructor() {
@@ -94,6 +96,12 @@ class GenreRecs extends Component {
                         ))
                     }
                 </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Footer/>
             </div>
         );
     }

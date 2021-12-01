@@ -89,6 +89,7 @@ class App extends Component {
               <Route path="/forgotusername" component={forgotusername} />
               <Route path="/blog" component={blog} />
               <Route path="/AboutUs" component={AboutUs} />
+              
 
               {/* <Route component={Notfound} /> */}
             </div>

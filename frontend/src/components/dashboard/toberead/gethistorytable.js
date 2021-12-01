@@ -70,6 +70,9 @@ class GetHistoryTable extends Component {
                       <p>
                         {rec.Synopsis}
                       </p>
+                      <p>
+                        <ToBeDeleteFromHistory gethistorytable={rec.book_name}/>
+                      </p>
                     </>
                   } placement="right">
                     <img src={rec.PictureLink} height={300} witdth={210} />
@@ -78,7 +81,7 @@ class GetHistoryTable extends Component {
               ))
             }
           </div>
-          <ToBeDeleteFromHistory gethistorytable={this.state.gethistorytable}/>
+          
         </div>
       </div>
     );
@@ -89,6 +92,7 @@ export default GetHistoryTable;
 
 
 /*
+
 gethistorytable
  <ToBeDeleteFromHistory gethistorytable={this.state.gethistorytable}/>
 */
