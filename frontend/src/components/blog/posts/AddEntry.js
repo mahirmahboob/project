@@ -10,6 +10,7 @@ class AddEntry extends Component {
             author: "",
             body: "",
             link: "",
+            dataAndTime: "",
         };
     }
 
@@ -47,7 +48,9 @@ class AddEntry extends Component {
 
        submitHandler = (e) => {
         e.preventDefault();
-    
+        const timestamp = Date.now();
+        const curren_time = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
+        console.log(curren_time);
 
         fetch(url, {
             method: 'POST',
@@ -60,6 +63,7 @@ class AddEntry extends Component {
                 author: this.state.author,
                 body: this.state.body,
                 link: this.state.link,
+                dataAndTime: curren_time
 
             })
         }).then(response => {
@@ -82,7 +86,7 @@ class AddEntry extends Component {
 
 
     render() {
-        const { title, imgLink, author, body, link } = this.state;
+        const { title, imgLink, author, body, link, dataAndTime } = this.state;
         return (
         <div style={{ backgroundColor:'LightGray', padding:'80px'}}> 
 

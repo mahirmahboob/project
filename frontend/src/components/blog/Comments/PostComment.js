@@ -49,16 +49,16 @@ class PostComment extends Component {
     return (
       <div>
         <br />
-        <h1
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            fontSize: '20px'
           }}
         >
-          Leave a Comment
-        </h1>
-        <br />
+          Leave a Comment!
+        </div>
         <form onSubmit={this.submitHandler}>
           <table
             border="0"
@@ -77,6 +77,7 @@ class PostComment extends Component {
                     name="user"
                     value={user}
                     onChange={this.changeHandler}
+                    style={{width:'500px', height:'20px'}}
                   />
                 </td>
               </tr>
@@ -88,12 +89,12 @@ class PostComment extends Component {
                     name="text"
                     value={text}
                     onChange={this.changeHandler}
+                    style={{width:'500px', height:'50px'}}
                   />
                 </td>
               </tr>
             </tbody>
           </table>
-          <br />
           <div
             style={{
               display: "flex",
@@ -101,13 +102,15 @@ class PostComment extends Component {
               alignItems: "center",
             }}
           >
-            <button className="btn btn-primary" type="submit">
+            <button style={{width:'70px', height:'30px'}} type="submit">
               Post
             </button>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
           </div>
-          <br />
-          <br />
-          <br />
+
         </form>
       </div>
     );

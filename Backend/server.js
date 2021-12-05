@@ -556,6 +556,7 @@ app.get('/posts', (req, res) => {
 //This endpoint will get all the comments for a specific title
 app.get('/comments/:title', (req, res) => {
     const title = (req.params.title);
+    console.log(title);
 
         connection.query('select * from comments where title = ?', title, function (err, result) {
 
@@ -610,7 +611,9 @@ app.post('/rest/submit/userpost', (req, res) => {
     const description = req.body.body;
     const articlelink = req.body.link;
 
-    connection.query('insert into blogtable set ?', {title: article_title, link: articlelink, description: description, author:author, articleimagelink: image_link}, function (error, success) {
+    const dateAndTime = req.body.dataAndTime
+
+    connection.query('insert into blogtable set ?', {title: article_title, link: articlelink, description: description, author:author, articleimagelink: image_link, postTime: dateAndTime}, function (error, success) {
         if (error)
         {
             res.status(404).send("failed. We can not add a user post to the database")

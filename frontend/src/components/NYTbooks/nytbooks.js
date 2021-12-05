@@ -17,7 +17,7 @@ export default class nytbooks extends React.Component{
         const response = await fetch(url);
         const data = await response.json();
         this.setState({ res: data.results.books, loading: false});
-        console.log(data)
+        
 
     }
     render(){
