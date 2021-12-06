@@ -91,7 +91,7 @@ class GenreRecs extends Component {
                                 <h2> Best Seller: {rec.best_seller}</h2>
                                 <h2>Series: {rec.series}</h2>
                                 <h2><a href={rec.LinkToAmazon} target="_blank"> Purchase Link</a> </h2>
-                                <img src={rec.PictureLink} height={400} witdth={400} />
+                                <img src={rec.PictureLink} height={300} witdth={300} />
                             </div>
                         ))
                     }

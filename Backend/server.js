@@ -81,42 +81,45 @@ app.get('/home/:genre', (req, res) => {
     })
 })
 
+
+
 // User takes a quiz
 app.post('/takeaquiz', (req, res) => {
-    const user_genre1 = req.body.genre;
-    const age_range = req.body.age;
-    const maximum_pages = req.body.page;
-    const publication_date = req.body.date;
-    const trigger_warning = req.body.triggers;
 
-    
-    console.log(user_genre1);
+    const genre = req.body.genre;
+    const age_range = req.body.age_range;
+    const maximum_pages = req.body.maximum_pages;
+    const publication_date= req.body.publication_date;
+    const mood = req.body.mood;
+    const thisisnotworking = req.body.character;
+    const setting = req.body.setting;
+    const trope = req.body.trope;
+    const element = req.body.element;
+
+    console.log(genre);
     console.log(age_range);
     console.log(maximum_pages);
     console.log(publication_date);
-    console.log(trigger_warning);
+    console.log(mood);
+    console.log(thisisnotworking);
+    console.log(setting);
+    console.log(trope);
+    console.log(element);
+    
+ connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND mood = ? AND setting = ? AND trope = ? AND element = ?`, [genre, age_range, maximum_pages, publication_date, mood, setting, trope, element], (error, result) => {
+    if(error)
+    {
+        console.log(error)
+        res.send("failed")
+    }
 
-
-const sqlquery = `SELECT *
-    FROM book_information
-    WHERE genre = ?
-    AND 
-    (age_range = ? AND maximum_pages <= ? AND publication_date >= ? AND trigger_warning = ?) ORDER BY rating LIMIT 1`;
-
-
-    connection.query(sqlquery, [user_genre1, age_range, maximum_pages, publication_date, trigger_warning], function (err, result){
-        if (err){
-            res.status(404).send("There is some problem");
-        }
-        else{
-            
-            //console.log(result);
-            console.log("we have a result");
-            console.log(result);
-            res.status(201).send(result);
-        }
-    })
-
+    else
+    {
+       //console.log("we are here 2")
+        //console.log(result)
+        res.send(result)
+    }
+ })
 })
 
 
@@ -518,7 +521,7 @@ app.get('/userdashboard/:user', function(req, res) {
 
 app.get('/toptenbooks', (req, res) => {
 
-        connection.query('select * from book_information order by rating LIMIT 10', function (err, result) {
+        connection.query('select * from book_information order by rating DESC LIMIT 10', function (err, result) {
 
         if (err) {
             //console.log("problem with top 10 books");
