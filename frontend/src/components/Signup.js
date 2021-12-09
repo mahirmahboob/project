@@ -182,7 +182,7 @@ class Signup extends Component {
                         <input style={submitStyle} type="submit" value="Submit"/>
                         <div>
                         Already have an account? 
-                            <a href="/login"> Log in Here!</a>
+                            <a href="/"> Log in Here!</a>
                         </div>
                     </form>
                 </div>

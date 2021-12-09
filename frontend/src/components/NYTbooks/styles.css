@@ -1,0 +1,63 @@
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.container {
+  height: 450px;
+  width: 900px;
+}
+
+.card-body d-flex justify-content-center align-items-center {
+  font-size: x-small;
+}
+
+.titleandauthor {
+  text-align: center;
+}
+
+.description {
+  text-align: justify;
+}
+
+.flip-card-outer {
+  width: 300px;
+  height: 400px;
+  margin: 25px 0;
+}
+
+.flip-card-outer .flip-card-inner {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: 0.5s linear 0.1s;
+  transition: 0.5s linear 0.1s;
+  position: relative;
+  width: inherit;
+  height: inherit;
+}
+
+.flip-card-outer .flip-card-inner.hover-trigger:hover {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.flip-card-outer .flip-card-inner .card {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-outer .flip-card-inner .card.front {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+  background-color: lightblue;
+}
+
+.flip-card-outer .flip-card-inner .card.back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  background-color: white;
+  line-height: 20px;
+}
+/*# sourceMappingURL=styles.css.map */

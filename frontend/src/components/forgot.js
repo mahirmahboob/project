@@ -177,6 +177,9 @@ class forgot extends Component {
                 <br/>
                 <br/>
                 <br/>
+                <br/>
+                <br/>
+                <br/>
                 <Footer/>
         </div>
         );

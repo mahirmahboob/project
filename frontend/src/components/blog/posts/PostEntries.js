@@ -15,8 +15,8 @@ const PostEntries = (postEntries) => {
                       {data.title}
                 </div>
                 <img 
-                    style={{width:'90%', height:'20%', paddingTop:'20px', paddingLeft:'0px'}}
-                    src={data.imgLink}
+                    style={{width:'90%', height:'10%', paddingTop:'20px', paddingLeft:'0px'}}
+                    src={data.articleimagelink}
                 />
                 <div style={{textAlign:'left', paddingLeft:'63px', color:'black', fontSize:'17px',fontFamily: "Lucida Console"}}>Written by {data.author}, Posted on {data.postTime}</div>
                 <br/>

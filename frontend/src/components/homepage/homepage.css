@@ -157,8 +157,11 @@
   font-weight: bold;
 }
 
+/* I (Mahir) added .des margin-right: 4% */
+
 .des {
   font-size: 150%;
+  margin-right: 4%;
 }
 
 .div-g {
