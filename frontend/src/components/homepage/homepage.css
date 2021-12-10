@@ -201,7 +201,7 @@
 .Link1 {
   font-family: "Raleway", sans-serif;
   color: black;
-  padding-left: 0%;
+  padding-left: 32%;
   font-size: 150%;
 }
 
@@ -230,5 +230,32 @@
   font-family: "Raleway", sans-serif;
   color: black;
   padding-left: 363px;
+  font-size: 150%;
+}
+
+.Week {
+  background-color: #f0bb62;
+  font-family: "Raleway", sans-serif;
+  text-align: left;
+  line-height: 2;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  margin-top: 5%;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.Week_Book {
+  width: 32%;
+  float: left;
+  padding-right: 6%;
+  padding-left: 4%;
+  padding-bottom: 25%;
+}
+
+.Link14 {
+  font-family: "Raleway", sans-serif;
+  color: black;
+  padding-left: 0%;
   font-size: 150%;
 }

@@ -58,6 +58,15 @@ class Homepage extends Component {
                     come take a look around the site to see how we can help.
                     </p>
                 </div>
+                <div className="Week">
+                    <img className="Week_Book" alt="book" src="./img/week_book.jpeg" />
+                    <p className="sec-title">Book Of The Week!</p>
+                    <p className="des"> When a friendly game of Truth and Dare leads to 
+                    an uncomplicated four-date arrangement with Seth, Tara can't say she 
+                    minds. But their dates, while sweet, have a tendency to hit rockblocks.
+                    Thankfully, their non-dates and chance meetings get frequent and heated.
+                    </p>
+                </div>
 
                 <div className="Genre">
                     <img className="G" alt="book" src="./img/genre.png" />
@@ -143,7 +152,7 @@ class Homepage extends Component {
                         favorite books that we love to read during our spare time.
                     </p>
                     <div>
-                        <Link className="Link1" to="/aboutus">
+                        <Link className="Link14" to="/aboutus">
                             <i></i> About Us!
                         </Link>
                     </div>
