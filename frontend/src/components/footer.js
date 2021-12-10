@@ -37,7 +37,7 @@ export class Footer extends Component {
                     <a href="/searchdir">Search</a>
                 </div>
             </div>
-            <div style={{ paddingTop:'90px'}}>
+            <div style={{ paddingTop:'100px'}}>
             <SocialIcon url="https://bookmarked.com" network="twitter" bgColor="darkgray" style={{ height: 35, width: 35}}/>&nbsp;&nbsp;&nbsp;
             <SocialIcon url="https://bookmarked.com" network="facebook" bgColor="darkgray" style={{ height: 35, width: 35 }}/>&nbsp;&nbsp;&nbsp;
             <SocialIcon url="https://bookmarked.com" network="linkedin" bgColor="darkgray" style={{ height: 35, width: 35 }}/>&nbsp;&nbsp;&nbsp;

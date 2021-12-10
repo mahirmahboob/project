@@ -157,7 +157,9 @@ const Dashboard = () => {
                         fontSize: '25px'
                     }}
                     >
-                    Your Reading Log
+                        <hr />
+                        <br/>
+                    Reading History 
                     </div>
                 <GetHistoryTable updateSuccess={updateSuccess} updateLikes={updateLikes}/>
 

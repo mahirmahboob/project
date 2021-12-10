@@ -10,13 +10,13 @@ class BlogMain extends Component {
         
         <div style = {{backgroundColor:'#f5f5f5'}}>
           <div style={{display: 'flex'}}> 
-              <div style = {{backgroundColor:'#f5f5f5', width:'40%', height:'900px'}}>
-                  <img style={{ width: '450px',height: '240px', paddingLeft:'0px', paddingRight:'0px', paddingTop: '20px'}}
+              <div style = {{backgroundColor:'#f5f5f5', width:'35%', height:'700px'}}>
+                  <img style={{ width: '450px',height: '240px', paddingLeft:'0px', paddingRight:'0px', paddingTop: '120px', marginTop: '120px'}}
                       alt="logo of the blog"
                       src="/img/novelIdeas.png"
                   />
               </div>
-              <div style = {{backgroundColor:'#776464', width:'50%', paddingLeft:'150px', paddingRight:'150px', paddingTop:'250px'}}> 
+              <div style = {{backgroundColor:'#776464', width:'65%', paddingLeft:'150px', paddingRight:'150px', paddingTop:'250px'}}> 
                     <div style={{textAlign:'left', color:'whitesmoke', fontSize:'60px',fontFamily: "Lucida Console"}}>
                       Welcome! 
                     </div>
@@ -115,8 +115,10 @@ class BlogMain extends Component {
             </div>
         
         <Posts />
-        <div> 
-            <h2>Here is top Three best selling fiction books from NYT</h2>
+        <br/>
+        <br/>
+        <div style={{fontSize:'40px',fontFamily: "Lucida Console"}}>  
+            New York Times Bestsellers List
         </div>
         <div> 
         <Nyttopbooks/>

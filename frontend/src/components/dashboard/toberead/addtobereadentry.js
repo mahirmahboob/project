@@ -86,6 +86,8 @@ class AddEntry extends Component {
             </div>
           </div>
         </form>
+        <br/>
+        <div style={{fontFamily: 'Courier New',fontSize: '25px'}}>To Be Read</div>
       </div>
     );
   }

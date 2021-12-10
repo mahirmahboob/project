@@ -88,15 +88,17 @@ class Homepage extends Component {
                     <p className="sec-title">Quiz</p>
                     <p className="des">
                         You are the most important, so why shouldn’t things be about you?
-                        Complete our short quiz so we can narrow things down to your tastes, just the way you like it.
+                        Complete our short quiz so we can narrow things down to your tastes.
                         Don’t worry about being overwhelmed by too many options any longer;
-                        we’ll find you that perfect fit.
+                        we’ll find you the perfect fit.
         </p>
-                    <div>
-                        <Link className="Link5" to="/recQuiz">
+<div>
+                        <Link className="Link3" to="/recQuiz">
                             <i></i> Take a quiz!
         </Link>
                     </div>
+                    
+
                 </div>
 
                 <div className="Random">

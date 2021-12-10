@@ -17,7 +17,9 @@ class Posts extends Component {
   render() {
     return (
       <div>
-        Blog Posts
+        <br/>
+        <br/>
+        <img style={{width:'650px',height:'150px'}} alt="blog posts logo" src="/img/postsintro.png"/>
         <PostEntries postEntries={this.state.posts} />
         <br/>
         <AddEntry/>

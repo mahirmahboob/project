@@ -18,9 +18,9 @@ const PostEntries = (postEntries) => {
                     style={{width:'90%', height:'10%', paddingTop:'20px', paddingLeft:'0px'}}
                     src={data.articleimagelink}
                 />
-                <div style={{textAlign:'left', paddingLeft:'63px', color:'black', fontSize:'17px',fontFamily: "Lucida Console"}}>Written by {data.author}, Posted on {data.postTime}</div>
+                <div style={{textAlign:'left', paddingLeft:'70px', color:'black', fontSize:'17px',fontFamily: "Lucida Console"}}>Written by {data.author}, Posted on {data.postTime}</div>
                 <br/>
-                <div style = {{textAlign:"left", fontSize:'20px', paddingLeft: '60px',paddingRight:'50px',paddingBottom:'40px'}}>
+                <div style = {{textAlign:"left", fontSize:'20px', paddingLeft: '70px',paddingRight:'50px',paddingBottom:'40px'}}>
                     {data.description} 
                     <a href={data.link}>Link</a>
                     <div>

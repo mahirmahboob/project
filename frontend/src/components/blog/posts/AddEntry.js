@@ -88,7 +88,7 @@ class AddEntry extends Component {
     render() {
         const { title, imgLink, author, body, link, dataAndTime } = this.state;
         return (
-        <div style={{ backgroundColor:'LightGray', padding:'80px'}}> 
+        <div style={{ backgroundColor:'LightGray', paddingLeft:'0px',paddingBottom:'50px',paddingRight:'50px',paddingTop:'50px'}}> 
 
             <div style={{backgroundColor:'white', padding: '5%', width: '105%', height: '35%', display: 'flex'}}>
             <div>

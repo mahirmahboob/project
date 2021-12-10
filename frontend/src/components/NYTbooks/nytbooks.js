@@ -25,7 +25,7 @@ export default class nytbooks extends React.Component{
     <div className="container">
       <div className="row h-100">
         <div class="col d-flex flex-column flex-md-row justify-content-around align-items-center">
-          {this.state.res.slice(0, 3).map((rec) => (
+          {this.state.res.slice(0, 4).map((rec) => (
             <FlipCard key={rec.id} card={rec} />
           ))}
         </div>
