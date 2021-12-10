@@ -16,36 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `book_information`
+-- Table structure for table `user_bookmark`
 --
 
-DROP TABLE IF EXISTS `book_information`;
+DROP TABLE IF EXISTS `user_bookmark`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `book_information` (
+CREATE TABLE `user_bookmark` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
   `book_name` varchar(100) NOT NULL,
   `genre` varchar(100) NOT NULL,
-  `rating` int DEFAULT NULL,
   `author` varchar(100) NOT NULL,
+  `rating` int NOT NULL,
   `age_range` varchar(45) NOT NULL,
   `maximum_pages` int NOT NULL,
   `publication_date` int NOT NULL,
   `trigger_warning` varchar(100) NOT NULL,
-  `best_seller` tinyint NOT NULL,
-  `series` tinyint NOT NULL,
-  PRIMARY KEY (`book_name`),
-  UNIQUE KEY `book_name_UNIQUE` (`book_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `best_seller` varchar(45) NOT NULL,
+  `series` varchar(45) NOT NULL,
+  `PictureLink` varchar(1000) NOT NULL,
+  `LinkToAmazon` varchar(1000) NOT NULL,
+  `Synopsis` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `book_information`
+-- Dumping data for table `user_bookmark`
 --
 
-LOCK TABLES `book_information` WRITE;
-/*!40000 ALTER TABLE `book_information` DISABLE KEYS */;
-INSERT INTO `book_information` VALUES ('Craving: Hungry for more','cooking',25,'adeena Sussman','all',150,2010,'No trigger warning',0,0),('Harry Potter','fantasy',84,'J. K. Rowling','young adult',223,2005,'violence',0,1),('my own book','drama',45,'Mahir Mahboob','all',100,2020,'blood',1,0),('Romeo and Juliet','romance',87,'William Shakespeare','young adult',200,1960,'suicide',0,0),('The Hunger games','adventure',88,'susanne collins','adult',200,2011,'death',1,1),('The lightning Theif','action',81,'Rick Riordan','all',185,2012,'kidnapping',0,1),('The sea of the monster','action',91,'Rick Riordan','all',192,2014,'war',0,1),('The second book by Mahir','detective',99,'Mahir Mahboob','child',400,2021,'Animal cruelty',0,0),('The twilight sage','fantasy',94,'stephenie mayer ','all',198,2008,'vampire',1,1);
-/*!40000 ALTER TABLE `book_information` ENABLE KEYS */;
+LOCK TABLES `user_bookmark` WRITE;
+/*!40000 ALTER TABLE `user_bookmark` DISABLE KEYS */;
+INSERT INTO `user_bookmark` VALUES (117,'mahirmahboob91','Farenheit 451','science fiction','Ray Bradbury',90,'teens',149,2000,'death','Yes','No','https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1608059811l/56302573.jpg','https://www.goodreads.com/buy_buttons/12/follow?book_id=56302573&page_type=book&page_type_id=56302573&ref=x_gr_w_bb_sin&sub_page_type=show&tag=x_gr_w_bb_sin-20','Farenheit 451 has been analyzed and reinterpreted by every successive generation to change its meaning. This is chiefly because the book is full of assumptions and vague symbolism which can be taken many ways, and rarely does anyone come away from the book with the conclusion the author intended, which would suggest that it is a failed attempt.');
+/*!40000 ALTER TABLE `user_bookmark` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-24 20:28:30
+-- Dump completed on 2021-12-10 14:42:20
