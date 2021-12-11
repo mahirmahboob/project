@@ -115,7 +115,7 @@ class Login extends Component {
                 <table border="0">
                     <tbody>
                         <tr>
-                            <td>username:</td>
+                            <td>Username:</td>
                             <div style={inputStyle}>
                                 <input type="username" name="username" size="20" autocorrect="off" spellcheck="false"
                                        autocapitalize="off" value={username} onChange={this.handleChange}/>
