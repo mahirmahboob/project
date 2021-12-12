@@ -52,7 +52,7 @@ export default class SearchBar extends Component {
   render() {  
     //console.log(this.state.book_name);  
     return (
-      <div style={{justifyContent:'center',width:'500px', backgroundColor:'gray'}}>
+      <div style={{justifyContent:'center',width:'510px', backgroundColor:'gray'}}>
         
           <select value={this.state.book_name} onChange={this.handleChange}>
         {this.state.selectOptions.map(function(data, key){  return (

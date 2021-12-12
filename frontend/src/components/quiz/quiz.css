@@ -40,13 +40,3 @@
   display: flex;
   justify-content: center;
 }
-.quiz-recommendation {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.somewriting {
-  text-align: center;
-  font-family: "Railway";
-  font-size: 150%;
-}

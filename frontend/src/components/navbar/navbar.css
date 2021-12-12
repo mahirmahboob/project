@@ -1,5 +1,5 @@
 .NavbarItems {
-  background: #C36839;
+  background: #c36839;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -7,16 +7,14 @@
   font-size: 1.2rem;
 }
 
-.book-logo{
-  width:34%;
-  float:left;
+.book-logo {
+  width: 34%;
+  float: left;
   margin-bottom: 1%;
-
 }
 
-.fas-fa-newspaper{
-  float:left;
-  
+.fas-fa-newspaper {
+  float: left;
 }
 
 .navbar-logo {
@@ -42,7 +40,7 @@
   float: right;
   margin-left: auto;
   margin-right: 20px;
-  color:white !important;
+  color: white !important;
 }
 
 .link-item-second-right {
@@ -52,6 +50,6 @@
   margin-right: 40px;
 }
 
-.bu{
-  color:white;
+.bu {
+  color: white;
 }

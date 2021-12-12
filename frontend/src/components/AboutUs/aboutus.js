@@ -20,9 +20,9 @@ class AboutUs extends Component {
                 <div style = {{backgroundColor:'#f5f5f5'}}>
                     <div style={{display: 'flex'}}> 
                         <div style = {{backgroundColor:'#ffffff', width:'40%', height:'740px'}}>
-                            <img style={{ width: '400px',height: '500px', paddingTop:'290px'}}
+                            <img style={{ width: '400px',height: '400px', paddingTop:'290px'}}
                                 alt="logo of the about us"
-                                src="/img/AboutUs.png"
+                                src="/img/AboutUsTwo.png"
                             />
                         </div>
                         <div style = {{backgroundColor:'#776464', width:'60%', paddingLeft:'100px', paddingRight:'60px', paddingTop:'100px'}}> 

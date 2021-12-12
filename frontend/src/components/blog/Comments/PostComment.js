@@ -35,7 +35,8 @@ class PostComment extends Component {
             }
             else if (response.status === 201)
             {
-              alert("Success");
+              window.location.reload(false);
+              
             }
             })
            .catch(function(error) {
@@ -102,7 +103,7 @@ class PostComment extends Component {
               alignItems: "center",
             }}
           >
-            <button style={{width:'70px', height:'30px'}} type="submit">
+            <button style={{width:'90px', height:'40px'}} type="submit">
               Post
             </button>
             <br/>

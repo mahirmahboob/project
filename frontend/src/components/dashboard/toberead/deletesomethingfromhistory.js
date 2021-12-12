@@ -30,7 +30,6 @@ class DeleteSomethingFromHistoryTable extends Component {
 
             else if (response.status === 201)
             {
-              alert("We succesfully deleted from the history table");
               window.location.reload(false);
             }
             })

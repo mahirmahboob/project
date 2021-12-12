@@ -95,31 +95,44 @@ app.post('/takeaquiz', (req, res) => {
     const setting = req.body.setting;
     const trope = req.body.trope;
     const element = req.body.element;
+    const subgenre = req.body.subgenre;
 
-    console.log(genre);
-    console.log(age_range);
-    console.log(maximum_pages);
-    console.log(publication_date);
-    console.log(mood);
-    console.log(thisisnotworking);
-    console.log(setting);
-    console.log(trope);
-    console.log(element);
-    
- connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND mood = ? AND setting = ? AND trope = ? AND element = ?`, [genre, age_range, maximum_pages, publication_date, mood, setting, trope, element], (error, result) => {
-    if(error)
+
+    if (genre === 'fantasy') 
     {
-        console.log(error)
-        res.send("failed")
+            connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND setting = ? AND trope = ? AND element = ? AND subgenre = ?`, [genre, age_range, maximum_pages, publication_date, setting, trope, element, subgenre], (error, result) => {
+            if(error)
+            {
+            console.log(error)
+            res.send("failed")
+            }
+
+            else
+            {
+            //console.log("we are here 2")
+            //console.log(result)
+            res.send(result)
+            }
+            })
     }
 
     else
     {
-       //console.log("we are here 2")
-        //console.log(result)
-        res.send(result)
-    }
- })
+        connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND mood = ? AND setting = ? AND trope = ? AND element = ?`, [genre, age_range, maximum_pages, publication_date, mood, setting, trope, element], (error, result) => {
+            if(error)
+            {
+                console.log(error)
+                res.send("failed")
+            }
+
+            else
+            {
+            //console.log("we are here 2")
+                //console.log(result)
+                res.send(result)
+            }
+        })
+}
 })
 
 

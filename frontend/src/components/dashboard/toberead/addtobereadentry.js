@@ -46,7 +46,6 @@ class AddEntry extends Component {
 
             else if (response.status === 201)
             {
-              alert("Succesfull adding the book")
               window.location.reload(false);
             }
             })
@@ -80,7 +79,7 @@ class AddEntry extends Component {
             </div>
             <div>
               <br/>
-              <button style={{backgroundColor:"steelBlue", color:'white', fontFamily: 'Courier New',width:'500px', height:'40px'}} type="submit">
+              <button style={{backgroundColor:"steelBlue", color:'white', fontFamily: 'Courier New',width:'450px', height:'40px'}} type="submit">
                 Submit
               </button>
             </div>
