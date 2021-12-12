@@ -27,7 +27,7 @@ Here are the steps.
    npm -g i sass
    npm i --save ag-grid-community ag-grid-react react-dom-factories
 
-7. Next go to src , then component, then delete the NYTBooks folder. Also, go to blog folder, then mainblog.js to delete line 4 and 122. If you want to use NYT api then please make an account with NYT developer and get an api url. All you have to do is replace line 9 on nytbook.js which is located on NYTbooks folder.
+7. These are the only packages you will need
 
 8. After that, type "npm start". This should open a tab with URL http://localhost:3000
 9. We are done with the frontend part.
