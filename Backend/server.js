@@ -116,7 +116,7 @@ app.post('/takeaquiz', (req, res) => {
             })
     }
 
-    else
+    else if (genre === 'romance')
     {
         connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND mood = ? AND setting = ? AND trope = ? AND element = ?`, [genre, age_range, maximum_pages, publication_date, mood, setting, trope, element], (error, result) => {
             if(error)
@@ -132,7 +132,22 @@ app.post('/takeaquiz', (req, res) => {
                 res.send(result)
             }
         })
-}
+    }
+
+    else
+    {
+        connection.query('SELECT * FROM book_information WHERE rating >= 75 ORDER BY rand() LIMIT 1', function (err, result) {
+
+        if (err) {
+            res.status(404).send('There is some problem with getting one random book with 75 or higher rating for the user');
+        }
+
+        else {
+            res.send(result);
+        }
+
+    })
+    }
 })
 
 
