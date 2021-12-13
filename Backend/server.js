@@ -90,12 +90,15 @@ app.post('/takeaquiz', (req, res) => {
     const age_range = req.body.age_range;
     const maximum_pages = req.body.maximum_pages;
     const publication_date= req.body.publication_date;
+
     const mood = req.body.mood;
-    const thisisnotworking = req.body.character;
+    const character = req.body.character;
     const setting = req.body.setting;
     const trope = req.body.trope;
     const element = req.body.element;
     const subgenre = req.body.subgenre;
+    const POV = req.body.POV;
+    const time = req.body.time;
 
 
     if (genre === 'fantasy') 
@@ -134,16 +137,64 @@ app.post('/takeaquiz', (req, res) => {
         })
     }
 
+    else if(genre === `historicfiction`)
+    {
+            connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND time = ? AND element = ?`, [genre, age_range, maximum_pages, publication_date, time, element], (error, result) => {
+            if(error)
+            {
+                console.log(error)
+                res.send("failed")
+            }
+
+            else
+            {
+            //console.log("we are here 2")
+                //console.log(result)
+                res.send(result)
+            }
+        })
+
+    }
+
+    else if (genre === 'mystery')
+    {
+            connection.query(`select * from Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND mood = ? AND subgenre = ? AND trope = ? And element = ? AND POV = ?`, [genre, age_range, maximum_pages, publication_date, mood, subgenre, trope, element, POV], (error, result) => {
+            if(error)
+            {
+                console.log(error)
+                res.send("failed")
+            }
+
+            else
+            {
+            //console.log("we are here 2")
+                //console.log(result)
+                res.send(result)
+            }
+        })
+
+    }
+
+    // we could not find any book with user choice
     else
     {
-        connection.query('SELECT * FROM book_information WHERE rating >= 75 ORDER BY rand() LIMIT 1', function (err, result) {
+        connection.query('SELECT * FROM Nuzhat_db_book_information where genre = ? AND age_range = ? AND maximum_pages = ? AND publication_date = ? AND rating >= 75 ORDER BY rand() LIMIT 1', [genre, age_range, maximum_pages, publication_date], function (err, result) {
 
         if (err) {
             res.status(404).send('There is some problem with getting one random book with 75 or higher rating for the user');
         }
 
         else {
+            if (result.length === 0)
+            {
+                connection.query('SELECT * FROM Nuzhat_db_book_information WHERE rating >= 75 ORDER BY rand() LIMIT 1', function (errrr, resultt) {
+                    res.send(resultt)
+                })
+            }
+            else
+            {
             res.send(result);
+            }
         }
 
     })
