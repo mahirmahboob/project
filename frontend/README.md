@@ -9,6 +9,6 @@
 
 Then you should be able to see any edits you make to the code files reflected on the app running on http://localhost:3000/ 
 
-#### Extra Packages: (npm install) ag-grid-react, ag-grid-community, react-bootstrap, react-router-dom, @material-ui/core
+#### Extra Packages: (npm install) ag-grid-react, ag-grid-community, react-bootstrap, react-router-dom, @material-ui/core, react-responsive-carousel, react-tooltip, reactjs-popup
 
 #### To download all these packages, just type npm install in terminal
